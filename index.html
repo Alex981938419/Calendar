@@ -99,7 +99,166 @@ body {
 
 
 /* =====================================================
-   CONTENEDOR
+   DECORACIÓN LATERAL
+===================================================== */
+
+.side-decor {
+
+    position: fixed;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 70px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-evenly;
+
+    align-items: center;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.side-decor.left {
+    left: 6px;
+}
+
+.side-decor.right {
+    right: 6px;
+}
+
+.side-decor span {
+
+    font-size: 20px;
+
+    opacity: .38;
+
+    color: #d98da0;
+
+    animation:
+        sideDrift
+        6s
+        ease-in-out
+        infinite;
+}
+
+@keyframes sideDrift {
+
+    0%,100% {
+        transform:
+            translateX(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateX(6px)
+            rotate(-8deg);
+    }
+}
+
+@media (max-width: 760px) {
+
+    .side-decor {
+        display: none;
+    }
+
+}
+
+
+/* =====================================================
+   STICKERS (imágenes que el usuario puede cambiar)
+===================================================== */
+
+.content-frame {
+
+    position: relative;
+}
+
+.sticker {
+
+    position: absolute;
+
+    width: 58px;
+
+    height: auto;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 5px 10px
+            rgba(120,60,80,.28)
+        );
+
+    z-index: 5;
+
+    user-select: none;
+}
+
+.sticker-1 {
+    top: -6px;
+    left: 6px;
+    transform: rotate(-12deg);
+}
+
+.sticker-2 {
+    top: -6px;
+    right: 6px;
+    transform: rotate(11deg);
+}
+
+.sticker-3 {
+    bottom: 4px;
+    left: 6px;
+    width: 52px;
+    transform: rotate(9deg);
+}
+
+.sticker-4 {
+    bottom: 4px;
+    right: 6px;
+    width: 52px;
+    transform: rotate(-9deg);
+}
+
+@media (max-width: 500px) {
+
+    .sticker {
+        width: 44px;
+    }
+
+    .sticker-1 {
+        top: -4px;
+        left: 2px;
+    }
+
+    .sticker-2 {
+        top: -4px;
+        right: 2px;
+    }
+
+    .sticker-3 {
+        left: 2px;
+        width: 38px;
+    }
+
+    .sticker-4 {
+        right: 2px;
+        width: 38px;
+    }
+
+}
+
+
+/* =====================================================
+   CINTA LATERAL DEL CONTENEDOR
 ===================================================== */
 
 .container {
@@ -114,8 +273,16 @@ body {
 
     padding:
         35px
-        18px
+        26px
         60px;
+
+    border-left:
+        2px dashed
+        rgba(198,120,140,.25);
+
+    border-right:
+        2px dashed
+        rgba(198,120,140,.25);
 }
 
 
@@ -244,6 +411,18 @@ h1 {
     margin-top: 6px;
 
     color: #986575;
+}
+
+
+.tz-note {
+
+    font-size: 11px;
+
+    margin-top: 8px;
+
+    color: #b98894;
+
+    letter-spacing: .3px;
 }
 
 
@@ -706,6 +885,10 @@ h1 {
             25px
             14px
             45px;
+
+        border-left: none;
+
+        border-right: none;
     }
 
     .calendar {
@@ -737,6 +920,14 @@ h1 {
 
 
 <!-- =====================================================
+     DECORACIÓN LATERAL (columnas de iconos)
+===================================================== -->
+
+<div class="side-decor left" id="sideLeft"></div>
+<div class="side-decor right" id="sideRight"></div>
+
+
+<!-- =====================================================
      CORAZONES DE FONDO
 ===================================================== -->
 
@@ -760,9 +951,55 @@ h1 {
     ♡
 </div>
 
+<div class="background-heart"
+     style="left:5%;top:45%;animation-delay:3s;">
+    ✨
+</div>
+
+<div class="background-heart"
+     style="left:92%;top:55%;animation-delay:5s;">
+    ✨
+</div>
+
 
 
 <div class="container">
+
+
+<div class="content-frame">
+
+
+<!-- =====================================================
+     STICKERS
+     ¿Quieres poner tus propias imágenes?
+     Sustituye el "src" de cada <img> de abajo por
+     el nombre de tu archivo .png o .jpg
+     (ponlo en la misma carpeta que este .html,
+     o escribe la ruta completa).
+     Mientras no tengas la imagen, se muestra
+     un sticker de emoji de relleno automáticamente.
+===================================================== -->
+
+<img
+    src="sticker1.png"
+    alt="sticker"
+    class="sticker sticker-1">
+
+<img
+    src="sticker2.png"
+    alt="sticker"
+    class="sticker sticker-2">
+
+<img
+    src="sticker3.png"
+    alt="sticker"
+    class="sticker sticker-3">
+
+<img
+    src="sticker4.png"
+    alt="sticker"
+    class="sticker sticker-4">
+
 
 
 <!-- =====================================================
@@ -794,7 +1031,7 @@ h1 {
 <section class="countdown">
 
     <div class="countdown-label">
-        Faltan
+        还有
     </div>
 
     <div
@@ -804,7 +1041,7 @@ h1 {
     </div>
 
     <div class="days-text">
-        días para volver a verte ❤️
+        天就能再见到你了 ❤️
     </div>
 
 </section>
@@ -820,6 +1057,8 @@ h1 {
     id="calendar">
 </main>
 
+
+</div>
 
 
 <div class="footer">
@@ -885,20 +1124,27 @@ h1 {
 
 /*
     FECHA DEL ENCUENTRO
+    (se interpreta en hora de China, UTC+8,
+    gracias al sufijo "+08:00")
 
-    24 de septiembre de 2026
+    24 de septiembre de 2026, 00:00 hora de China
 */
 
 const MEETING_DATE =
-    new Date("2026-09-24T00:00:00");
+    new Date("2026-09-24T00:00:00+08:00");
 
 
 /*
     PRIMER DÍA DEL CALENDARIO
+    (fecha de calendario en China, no como objeto Date
+    para evitar líos de zona horaria del navegador)
 */
 
-const START_DATE =
-    new Date("2026-09-01T00:00:00");
+const START_DATE_PARTS = {
+    year: 2026,
+    month: 9,
+    day: 1
+};
 
 
 
@@ -923,27 +1169,40 @@ const surprises = [
     {
         day: 1,
 
-        title: "Día 1 ❤️",
+        title: "第一天 🎄",
 
         type: "text",
 
         content:
-        "Empieza nuestra cuenta atrás.\n\n" +
-        "24 días pueden parecer muchos...\n" +
-        "pero cada día estaremos un poquito más cerca."
+        "欢迎来到属于你的圣诞倒数日历！.🗓️\n\n" +
+        "在我的国家，很多人都会用圣诞倒数日历，每天打开一扇小门，里面藏着一个小惊喜，一直倒数到圣诞节🎁\n" +
+        "既然我们24号也会见面，我觉得用这样的方式来倒数我们的见面日，再合适不过了！\n"+
+        "我为你准备了24份小惊喜，你需要一天一天、一扇一扇地打开，直到我们见面。不可以作弊，绝对不许提前偷看哦！！👀"
+
     },
 
 
     {
         day: 2,
 
-        title: "Día 2 💌",
+        title: "第二天 🧩",
 
         type: "text",
 
         content:
-        "今天想告诉你：\n" +
-        "我已经开始期待见到你了。❤️"
+
+        "谜语\n\n"+
+
+        "有一样东西，我本来就没什么信心能应付得了，\n" +
+        "可为了逞强装勇敢，我还是试了，结果给了我一个让我难受了一整晚的教训。\n\n" +
+        "即便如此，我还是装作若无其事\n" +
+        "又接受了另一个挑战，完全没有从第一次中吸取教训\n" +
+        "最后，还是我的嘴唇替我承认了真相。\n\n" +
+        "不是爱情，却让我感到灼热。" +
+        "不是亲吻，却留下了痕迹\n\n" +
+        "<strong>到底是什么东西，\n" +
+        "让我那么难受，\n" +
+        "却即使这样，我还是愿意和你再尝一次？</strong>🕵️\n"
     },
 
 
@@ -952,13 +1211,12 @@ const surprises = [
 
         title: "Día 3 📸",
 
-        type: "image",
+        type: "text",
 
         content:
-        "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80",
-
-        message:
-        "Una pequeña foto para recordarte que estoy pensando en ti."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -970,9 +1228,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Hoy no hay ningún regalo.\n\n" +
-        "Solo quería decirte:\n" +
-        "te echo de menos."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -984,8 +1242,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Cada día que pasa\n" +
-        "es un día menos para nuestro encuentro."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -997,9 +1256,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Imagínate que ahora mismo\n" +
-        "te doy un abrazo enorme.\n\n" +
-        "🤗❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1008,15 +1267,13 @@ const surprises = [
 
         title: "Día 7 📷",
 
-        type: "image",
+        type: "text",
 
         content:
-        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80",
-
-        message:
-        "Un recuerdo para hacer un poquito más corta la espera."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
-
 
     {
         day: 8,
@@ -1026,8 +1283,9 @@ const surprises = [
         type: "text",
 
         content:
-        "还有16天。\n\n" +
-        "每一天，都越来越期待。❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1039,10 +1297,10 @@ const surprises = [
         type: "link",
 
         content:
-        "https://open.spotify.com/",
-
-        message:
-        "Hoy quiero que escuches esta canción pensando en nosotros. 🎵"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
+    
     },
 
 
@@ -1054,8 +1312,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Si pudiera adelantar el tiempo,\n" +
-        "lo haría ahora mismo."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1064,13 +1323,12 @@ const surprises = [
 
         title: "Día 11 📸",
 
-        type: "image",
+        type: "text",
 
         content:
-        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80",
-
-        message:
-        "❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1082,9 +1340,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Buenas noches.\n\n" +
-        "Espero que sueñes bonito.\n" +
-        "Y si aparezco yo, mejor. 😉"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1096,9 +1354,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Vale por un abrazo\n" +
-        "de duración indefinida.\n\n" +
-        "Canjeable el 24 de septiembre. ❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1110,8 +1368,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Ya estamos en la segunda mitad.\n\n" +
-        "¿Tú también tienes tantas ganas como yo?"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1123,8 +1382,9 @@ const surprises = [
         type: "text",
 
         content:
-        "15 días.\n\n" +
-        "Parece mentira que cada vez quede menos."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1136,8 +1396,9 @@ const surprises = [
         type: "text",
 
         content:
-        "今天的惊喜很简单：\n\n" +
-        "想你了。❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1146,13 +1407,12 @@ const surprises = [
 
         title: "Día 17 📷",
 
-        type: "image",
+        type: "text",
 
         content:
-        "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80",
-
-        message:
-        "Pronto tendremos nuevos recuerdos juntos."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1164,10 +1424,9 @@ const surprises = [
         type: "link",
 
         content:
-        "https://www.youtube.com/",
-
-        message:
-        "Una canción para acompañar estos últimos días. ❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1179,9 +1438,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Quedan muy poquitos días.\n\n" +
-        "Ya casi puedo decir:\n" +
-        "“nos vemos mañana”."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1193,8 +1452,9 @@ const surprises = [
         type: "text",
 
         content:
-        "20 días superados.\n\n" +
-        "Gracias por esperar conmigo."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1206,9 +1466,9 @@ const surprises = [
         type: "text",
 
         content:
-        "三个星期了。\n\n" +
-        "再坚持一下。\n" +
-        "我们马上就见面了。❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1220,8 +1480,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Solo quedan 2 días después de hoy.\n\n" +
-        "¿Estás preparado/a? 👀❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1233,9 +1494,9 @@ const surprises = [
         type: "text",
 
         content:
-        "Mañana.\n\n" +
-        "Después de tantos días esperando...\n\n" +
-        "mañana finalmente nos vemos."
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     },
 
 
@@ -1247,11 +1508,9 @@ const surprises = [
         type: "final",
 
         content:
-        "终于到了。\n\n" +
-        "今天见。❤️\n\n" +
-        "Después de toda esta cuenta atrás,\n" +
-        "ya no tenemos que esperar más.\n\n" +
-        "Te veo hoy. ❤️"
+        "坏女孩！\n\n"+
+        "你比韩剧的剧情还好猜\n"+
+        "我可是永远领先你两步 😏"
     }
 
 ];
@@ -1259,33 +1518,75 @@ const surprises = [
 
 
 /* =====================================================
-   📅 CALCULAR DÍA ACTUAL
+   🇨🇳 UTILIDADES DE HORA DE CHINA
+===================================================== */
+
+
+function getChinaDateParts() {
+
+    const formatter =
+        new Intl.DateTimeFormat(
+            "en-US",
+            {
+                timeZone: "Asia/Shanghai",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            }
+        );
+
+    const parts =
+        formatter.formatToParts(
+            new Date()
+        );
+
+    const map = {};
+
+    parts.forEach(
+        p => {
+            map[p.type] =
+                p.value;
+        }
+    );
+
+    return {
+        year: parseInt(map.year, 10),
+        month: parseInt(map.month, 10),
+        day: parseInt(map.day, 10)
+    };
+
+}
+
+
+
+/* =====================================================
+   📅 CALCULAR DÍA ACTUAL (según calendario de China)
 ===================================================== */
 
 
 function getCurrentDay() {
 
-    const now =
-        new Date();
+    const chinaToday =
+        getChinaDateParts();
 
-    const today =
-        new Date(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDate()
+    const todayUTC =
+        Date.UTC(
+            chinaToday.year,
+            chinaToday.month - 1,
+            chinaToday.day
         );
 
-    const start =
-        new Date(
-            START_DATE.getFullYear(),
-            START_DATE.getMonth(),
-            START_DATE.getDate()
+    const startUTC =
+        Date.UTC(
+            START_DATE_PARTS.year,
+            START_DATE_PARTS.month - 1,
+            START_DATE_PARTS.day
         );
 
     const difference =
         Math.floor(
             (
-                today - start
+                todayUTC - startUTC
             )
             /
             (
@@ -1467,6 +1768,170 @@ function renderCalendar() {
 
 
 renderCalendar();
+
+
+
+/* =====================================================
+   🌸 DECORACIÓN LATERAL DINÁMICA
+===================================================== */
+
+
+function renderSideDecor() {
+
+    const symbols =
+        ["🌸", "✨", "❤️", "🕊️", "🌷", "💫"];
+
+    const left =
+        document.getElementById(
+            "sideLeft"
+        );
+
+    const right =
+        document.getElementById(
+            "sideRight"
+        );
+
+    for (
+        let i = 0;
+        i < 7;
+        i++
+    ) {
+
+        const symbolLeft =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+        const symbolRight =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+        const spanLeft =
+            document.createElement(
+                "span"
+            );
+
+        spanLeft.textContent =
+            symbolLeft;
+
+        spanLeft.style.animationDelay =
+            (i * 0.4) + "s";
+
+        const spanRight =
+            document.createElement(
+                "span"
+            );
+
+        spanRight.textContent =
+            symbolRight;
+
+        spanRight.style.animationDelay =
+            (i * 0.5) + "s";
+
+        left.appendChild(
+            spanLeft
+        );
+
+        right.appendChild(
+            spanRight
+        );
+
+    }
+
+}
+
+
+renderSideDecor();
+
+
+
+/* =====================================================
+   🖼️ STICKERS DE RELLENO (hasta que pongas los tuyos)
+===================================================== */
+
+
+const stickerFallbacks = [
+
+    { emoji: "🌸", bg: "#ffd7e0" },
+    { emoji: "✨", bg: "#ffe9ee" },
+    { emoji: "🧸", bg: "#ffe0c9" },
+    { emoji: "🍓", bg: "#ffd0d8" }
+
+];
+
+
+function makeFallbackSticker(
+    emoji,
+    bg
+) {
+
+    const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140">' +
+        '<circle cx="70" cy="70" r="66" fill="' + bg + '"/>' +
+        '<text x="70" y="92" font-size="70" text-anchor="middle">' +
+        emoji +
+        '</text></svg>';
+
+    return (
+        "data:image/svg+xml;base64," +
+        btoa(
+            unescape(
+                encodeURIComponent(svg)
+            )
+        )
+    );
+
+}
+
+
+function initStickers() {
+
+    const stickers =
+        document.querySelectorAll(
+            ".sticker"
+        );
+
+    stickers.forEach(
+        (img, index) => {
+
+            img.addEventListener(
+                "error",
+                function handler() {
+
+                    img.removeEventListener(
+                        "error",
+                        handler
+                    );
+
+                    const fallback =
+                        stickerFallbacks[
+                            index %
+                            stickerFallbacks.length
+                        ];
+
+                    img.src =
+                        makeFallbackSticker(
+                            fallback.emoji,
+                            fallback.bg
+                        );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+initStickers();
 
 
 
