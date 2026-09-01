@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>Hasta que nos encontremos ❤️</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            #fff5f7 0%,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 90%,
+            #ffe0e8 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #fff8fa,
+            #f9e8ed
+        );
+
+    color: #5b3842;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   FONDO
+===================================================== */
+
+.background-heart {
+
+    position: fixed;
+
+    color: #e8a5b5;
+
+    opacity: .18;
+
+    font-size: 25px;
+
+    pointer-events: none;
+
+    animation:
+        floatingHeart
+        7s
+        ease-in-out
+        infinite;
+
+    z-index: 0;
+}
+
+@keyframes floatingHeart {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            rotate(10deg);
+    }
+}
+
+
+/* =====================================================
+   CONTENEDOR
+===================================================== */
+
+.container {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 650px;
+
+    margin: auto;
+
+    padding:
+        35px
+        18px
+        60px;
+}
+
+
+/* =====================================================
+   CABECERA
+===================================================== */
+
+.header {
+
+    text-align: center;
+
+    margin-bottom: 28px;
+}
+
+.heart-logo {
+
+    font-size: 58px;
+
+    animation:
+        heartbeat
+        1.8s
+        ease-in-out
+        infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.12);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.08);
+    }
+}
+
+
+h1 {
+
+    margin:
+        8px
+        0
+        5px;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: #8e4558;
+}
+
+
+.subtitle {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    color: #9b6b77;
+}
+
+
+/* =====================================================
+   CUENTA ATRÁS
+===================================================== */
+
+.countdown {
+
+    background:
+        rgba(255,255,255,.75);
+
+    border:
+        1px solid
+        rgba(180,100,120,.15);
+
+    border-radius: 25px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(130,70,90,.12);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.countdown-label {
+
+    font-size: 14px;
+
+    color: #a06d7a;
+
+    margin-bottom: 5px;
+}
+
+
+.days-left {
+
+    font-size: 48px;
+
+    font-weight: 800;
+
+    color: #b65c72;
+
+    line-height: 1;
+}
+
+
+.days-text {
+
+    font-size: 15px;
+
+    margin-top: 6px;
+
+    color: #986575;
+}
+
+
+/* =====================================================
+   CALENDARIO
+===================================================== */
+
+.calendar {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+
+.day {
+
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f9e7ec
+        );
+
+    box-shadow:
+        0 7px 18px
+        rgba(130,70,90,.13);
+
+    color: #9b5267;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+
+    overflow: hidden;
+}
+
+
+.day:active {
+
+    transform:
+        scale(.94);
+}
+
+
+.day:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 12px 24px
+        rgba(130,70,90,.2);
+}
+
+
+.day.locked {
+
+    background:
+        linear-gradient(
+            145deg,
+            #eeeeee,
+            #e4e1e2
+        );
+
+    color: #aaa;
+
+    cursor: default;
+
+    box-shadow:
+        none;
+}
+
+
+.day.opened {
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8ccd8,
+            #efb4c4
+        );
+
+    color: #813f52;
+}
+
+
+.number {
+
+    font-size: 30px;
+
+    font-weight: 800;
+}
+
+
+.icon {
+
+    position: absolute;
+
+    top: 8px;
+
+    right: 10px;
+
+    font-size: 15px;
+}
+
+
+.mini-heart {
+
+    position: absolute;
+
+    bottom: 7px;
+
+    left: 9px;
+
+    font-size: 12px;
+
+    opacity: .6;
+}
+
+
+/* =====================================================
+   TEXTO INFERIOR
+===================================================== */
+
+.footer {
+
+    text-align: center;
+
+    margin-top: 28px;
+
+    color: #a27782;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(70,35,45,.55);
+
+    backdrop-filter:
+        blur(7px);
+
+    z-index: 100;
+}
+
+
+.modal.show {
+
+    display: flex;
+
+    animation:
+        fadeIn
+        .25s
+        ease;
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   TARJETA
+===================================================== */
+
+.card {
+
+    position: relative;
+
+    width:
+        min(
+            500px,
+            100%
+        );
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffafb,
+            #fff2f5
+        );
+
+    border-radius: 28px;
+
+    padding:
+        30px
+        23px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px
+        rgba(60,25,35,.35);
+
+    animation:
+        cardOpen
+        .35s
+        ease;
+}
+
+
+@keyframes cardOpen {
+
+    from {
+
+        transform:
+            scale(.82)
+            translateY(20px);
+
+        opacity: 0;
+    }
+
+    to {
+
+        transform:
+            scale(1)
+            translateY(0);
+
+        opacity: 1;
+    }
+}
+
+
+.close {
+
+    position: absolute;
+
+    top: 10px;
+
+    right: 13px;
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #9c6473;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+
+.modal-heart {
+
+    font-size: 50px;
+
+    margin-bottom: 5px;
+}
+
+
+.modal-title {
+
+    margin:
+        0
+        0
+        15px;
+
+    color: #9a4d62;
+
+    font-size: 25px;
+}
+
+
+.message {
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    white-space: pre-line;
+
+    color: #67434d;
+
+    margin: 15px 0;
+}
+
+
+/* =====================================================
+   IMAGEN
+===================================================== */
+
+.surprise-image {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 330px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+
+    margin:
+        15px
+        auto;
+}
+
+
+/* =====================================================
+   VIDEO
+===================================================== */
+
+.video {
+
+    width: 100%;
+
+    border-radius: 18px;
+
+    margin-top: 12px;
+}
+
+
+/* =====================================================
+   BOTÓN
+===================================================== */
+
+.button {
+
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding:
+        12px
+        25px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c76a82,
+            #a84f68
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 7px 15px
+        rgba(150,70,90,.2);
+}
+
+
+/* =====================================================
+   ÚLTIMO DÍA
+===================================================== */
+
+.final-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff0f4,
+            #ffe1e9
+        );
+}
+
+
+.final-heart {
+
+    font-size: 70px;
+
+    animation:
+        heartbeat
+        1.5s
+        infinite;
+}
+
+
+.final-title {
+
+    font-size: 29px;
+
+    color: #9a4059;
+
+    margin: 10px 0;
+}
+
+
+.final-message {
+
+    font-size: 19px;
+
+    line-height: 1.8;
+
+    color: #70424f;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 430px) {
+
+    .container {
+        padding:
+            25px
+            14px
+            45px;
+    }
+
+    .calendar {
+        gap: 9px;
+    }
+
+    .day {
+        border-radius: 16px;
+    }
+
+    .number {
+        font-size: 27px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .days-left {
+        font-size: 43px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     CORAZONES DE FONDO
+===================================================== -->
+
+<div class="background-heart"
+     style="left:8%;top:15%;animation-delay:0s;">
+    ♡
+</div>
+
+<div class="background-heart"
+     style="left:85%;top:25%;animation-delay:2s;">
+    ♡
+</div>
+
+<div class="background-heart"
+     style="left:15%;top:70%;animation-delay:4s;">
+    ♡
+</div>
+
+<div class="background-heart"
+     style="left:80%;top:75%;animation-delay:1s;">
+    ♡
+</div>
+
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     CABECERA
+===================================================== -->
+
+<header class="header">
+
+    <div class="heart-logo">
+        ❤️
+    </div>
+
+    <h1>
+        Hasta que nos encontremos
+    </h1>
+
+    <p class="subtitle">
+        每一天，都离你更近一点。
+    </p>
+
+</header>
+
+
+
+<!-- =====================================================
+     CUENTA ATRÁS
+===================================================== -->
+
+<section class="countdown">
+
+    <div class="countdown-label">
+        Faltan
+    </div>
+
+    <div
+        class="days-left"
+        id="daysLeft">
+        --
+    </div>
+
+    <div class="days-text">
+        días para volver a verte ❤️
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CALENDARIO
+===================================================== -->
+
+<main
+    class="calendar"
+    id="calendar">
+</main>
+
+
+
+<div class="footer">
+
+    24 días.<br>
+
+    24 pequeñas sorpresas.<br>
+
+    Y al final... nosotros. ❤️
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="modal">
+
+    <div
+        class="card"
+        id="modalCard">
+
+        <button
+            class="close"
+            onclick="closeModal()">
+            ×
+        </button>
+
+        <div
+            class="modal-heart"
+            id="modalHeart">
+            ❤️
+        </div>
+
+        <h2
+            class="modal-title"
+            id="modalTitle">
+        </h2>
+
+        <div
+            id="modalContent">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   ❤️ CONFIGURACIÓN PRINCIPAL
+===================================================== */
+
+
+/*
+    FECHA DEL ENCUENTRO
+
+    24 de septiembre de 2026
+*/
+
+const MEETING_DATE =
+    new Date("2026-09-24T00:00:00");
+
+
+/*
+    PRIMER DÍA DEL CALENDARIO
+*/
+
+const START_DATE =
+    new Date("2026-09-01T00:00:00");
+
+
+
+/* =====================================================
+   🎁 TUS 24 SORPRESAS
+===================================================== */
+
+
+/*
+    TIPOS DISPONIBLES:
+
+    "text"  → mensaje
+    "image" → fotografía
+    "video" → vídeo
+    "link"  → enlace
+
+*/
+
+
+const surprises = [
+
+    {
+        day: 1,
+
+        title: "Día 1 ❤️",
+
+        type: "text",
+
+        content:
+        "Empieza nuestra cuenta atrás.\n\n" +
+        "24 días pueden parecer muchos...\n" +
+        "pero cada día estaremos un poquito más cerca."
+    },
+
+
+    {
+        day: 2,
+
+        title: "Día 2 💌",
+
+        type: "text",
+
+        content:
+        "今天想告诉你：\n" +
+        "我已经开始期待见到你了。❤️"
+    },
+
+
+    {
+        day: 3,
+
+        title: "Día 3 📸",
+
+        type: "image",
+
+        content:
+        "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80",
+
+        message:
+        "Una pequeña foto para recordarte que estoy pensando en ti."
+    },
+
+
+    {
+        day: 4,
+
+        title: "Día 4 ❤️",
+
+        type: "text",
+
+        content:
+        "Hoy no hay ningún regalo.\n\n" +
+        "Solo quería decirte:\n" +
+        "te echo de menos."
+    },
+
+
+    {
+        day: 5,
+
+        title: "Día 5 ✨",
+
+        type: "text",
+
+        content:
+        "Cada día que pasa\n" +
+        "es un día menos para nuestro encuentro."
+    },
+
+
+    {
+        day: 6,
+
+        title: "Día 6 🥰",
+
+        type: "text",
+
+        content:
+        "Imagínate que ahora mismo\n" +
+        "te doy un abrazo enorme.\n\n" +
+        "🤗❤️"
+    },
+
+
+    {
+        day: 7,
+
+        title: "Día 7 📷",
+
+        type: "image",
+
+        content:
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80",
+
+        message:
+        "Un recuerdo para hacer un poquito más corta la espera."
+    },
+
+
+    {
+        day: 8,
+
+        title: "Día 8 💕",
+
+        type: "text",
+
+        content:
+        "还有16天。\n\n" +
+        "每一天，都越来越期待。❤️"
+    },
+
+
+    {
+        day: 9,
+
+        title: "Día 9 🎵",
+
+        type: "link",
+
+        content:
+        "https://open.spotify.com/",
+
+        message:
+        "Hoy quiero que escuches esta canción pensando en nosotros. 🎵"
+    },
+
+
+    {
+        day: 10,
+
+        title: "Día 10 💌",
+
+        type: "text",
+
+        content:
+        "Si pudiera adelantar el tiempo,\n" +
+        "lo haría ahora mismo."
+    },
+
+
+    {
+        day: 11,
+
+        title: "Día 11 📸",
+
+        type: "image",
+
+        content:
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80",
+
+        message:
+        "❤️"
+    },
+
+
+    {
+        day: 12,
+
+        title: "Día 12 🌙",
+
+        type: "text",
+
+        content:
+        "Buenas noches.\n\n" +
+        "Espero que sueñes bonito.\n" +
+        "Y si aparezco yo, mejor. 😉"
+    },
+
+
+    {
+        day: 13,
+
+        title: "Día 13 🎁",
+
+        type: "text",
+
+        content:
+        "Vale por un abrazo\n" +
+        "de duración indefinida.\n\n" +
+        "Canjeable el 24 de septiembre. ❤️"
+    },
+
+
+    {
+        day: 14,
+
+        title: "Día 14 ❤️",
+
+        type: "text",
+
+        content:
+        "Ya estamos en la segunda mitad.\n\n" +
+        "¿Tú también tienes tantas ganas como yo?"
+    },
+
+
+    {
+        day: 15,
+
+        title: "Día 15 ✨",
+
+        type: "text",
+
+        content:
+        "15 días.\n\n" +
+        "Parece mentira que cada vez quede menos."
+    },
+
+
+    {
+        day: 16,
+
+        title: "Día 16 💕",
+
+        type: "text",
+
+        content:
+        "今天的惊喜很简单：\n\n" +
+        "想你了。❤️"
+    },
+
+
+    {
+        day: 17,
+
+        title: "Día 17 📷",
+
+        type: "image",
+
+        content:
+        "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80",
+
+        message:
+        "Pronto tendremos nuevos recuerdos juntos."
+    },
+
+
+    {
+        day: 18,
+
+        title: "Día 18 🎵",
+
+        type: "link",
+
+        content:
+        "https://www.youtube.com/",
+
+        message:
+        "Una canción para acompañar estos últimos días. ❤️"
+    },
+
+
+    {
+        day: 19,
+
+        title: "Día 19 ❤️",
+
+        type: "text",
+
+        content:
+        "Quedan muy poquitos días.\n\n" +
+        "Ya casi puedo decir:\n" +
+        "“nos vemos mañana”."
+    },
+
+
+    {
+        day: 20,
+
+        title: "Día 20 🥰",
+
+        type: "text",
+
+        content:
+        "20 días superados.\n\n" +
+        "Gracias por esperar conmigo."
+    },
+
+
+    {
+        day: 21,
+
+        title: "Día 21 💌",
+
+        type: "text",
+
+        content:
+        "三个星期了。\n\n" +
+        "再坚持一下。\n" +
+        "我们马上就见面了。❤️"
+    },
+
+
+    {
+        day: 22,
+
+        title: "Día 22 ✨",
+
+        type: "text",
+
+        content:
+        "Solo quedan 2 días después de hoy.\n\n" +
+        "¿Estás preparado/a? 👀❤️"
+    },
+
+
+    {
+        day: 23,
+
+        title: "Día 23 ❤️",
+
+        type: "text",
+
+        content:
+        "Mañana.\n\n" +
+        "Después de tantos días esperando...\n\n" +
+        "mañana finalmente nos vemos."
+    },
+
+
+    {
+        day: 24,
+
+        title: "Hoy nos encontramos ❤️",
+
+        type: "final",
+
+        content:
+        "终于到了。\n\n" +
+        "今天见。❤️\n\n" +
+        "Después de toda esta cuenta atrás,\n" +
+        "ya no tenemos que esperar más.\n\n" +
+        "Te veo hoy. ❤️"
+    }
+
+];
+
+
+
+/* =====================================================
+   📅 CALCULAR DÍA ACTUAL
+===================================================== */
+
+
+function getCurrentDay() {
+
+    const now =
+        new Date();
+
+    const today =
+        new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+        );
+
+    const start =
+        new Date(
+            START_DATE.getFullYear(),
+            START_DATE.getMonth(),
+            START_DATE.getDate()
+        );
+
+    const difference =
+        Math.floor(
+            (
+                today - start
+            )
+            /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
+        );
+
+    return difference + 1;
+}
+
+
+
+/* =====================================================
+   ⏳ CUENTA ATRÁS
+===================================================== */
+
+
+function updateCountdown() {
+
+    const now =
+        new Date();
+
+    const difference =
+        MEETING_DATE - now;
+
+    const days =
+        Math.max(
+            0,
+            Math.ceil(
+                difference /
+                (
+                    1000 *
+                    60 *
+                    60 *
+                    24
+                )
+            )
+        );
+
+    document
+        .getElementById("daysLeft")
+        .textContent = days;
+
+}
+
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    60000
+);
+
+
+
+/* =====================================================
+   🎁 CREAR CALENDARIO
+===================================================== */
+
+
+function renderCalendar() {
+
+    const calendar =
+        document.getElementById(
+            "calendar"
+        );
+
+    calendar.innerHTML = "";
+
+    const currentDay =
+        getCurrentDay();
+
+
+    surprises.forEach(
+        item => {
+
+            const day =
+                document.createElement(
+                    "div"
+                );
+
+
+            day.className =
+                "day";
+
+
+            /*
+                DÍA FUTURO
+            */
+
+            if (
+                item.day >
+                currentDay
+            ) {
+
+                day.classList.add(
+                    "locked"
+                );
+
+                day.innerHTML = `
+
+                    <span class="number">
+                        ${item.day}
+                    </span>
+
+                    <span class="icon">
+                        🔒
+                    </span>
+
+                    <span class="mini-heart">
+                        ♡
+                    </span>
+
+                `;
+
+
+                day.onclick =
+                    function() {
+
+                        showLockedMessage(
+                            item.day
+                        );
+
+                    };
+
+            }
+
+
+            /*
+                DÍA DISPONIBLE
+            */
+
+            else {
+
+                day.classList.add(
+                    "opened"
+                );
+
+                day.innerHTML = `
+
+                    <span class="number">
+                        ${item.day}
+                    </span>
+
+                    <span class="icon">
+                        ❤️
+                    </span>
+
+                    <span class="mini-heart">
+                        ✨
+                    </span>
+
+                `;
+
+
+                day.onclick =
+                    function() {
+
+                        openSurprise(
+                            item
+                        );
+
+                    };
+
+            }
+
+
+            calendar.appendChild(
+                day
+            );
+
+        }
+    );
+
+}
+
+
+renderCalendar();
+
+
+
+/* =====================================================
+   🔒 DÍA BLOQUEADO
+===================================================== */
+
+
+function showLockedMessage(
+    day
+) {
+
+    alert(
+        "Todavía no ❤️\n\n" +
+        "La sorpresa del día " +
+        day +
+        " todavía está esperando."
+    );
+
+}
+
+
+
+/* =====================================================
+   🎁 ABRIR SORPRESA
+===================================================== */
+
+
+function openSurprise(
+    item
+) {
+
+    const modal =
+        document.getElementById(
+            "modal"
+        );
+
+    const title =
+        document.getElementById(
+            "modalTitle"
+        );
+
+    const content =
+        document.getElementById(
+            "modalContent"
+        );
+
+    const heart =
+        document.getElementById(
+            "modalHeart"
+        );
+
+
+    title.textContent =
+        item.title;
+
+
+    content.innerHTML =
+        "";
+
+
+    heart.textContent =
+        "❤️";
+
+
+    /*
+        MENSAJE
+    */
+
+    if (
+        item.type ===
+        "text"
+    ) {
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.content}
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+        FOTO
+    */
+
+    else if (
+        item.type ===
+        "image"
+    ) {
+
+        heart.textContent =
+            "📸";
+
+
+        content.innerHTML = `
+
+            ${
+                item.message
+                ?
+                `<div class="message">
+                    ${item.message}
+                </div>`
+                :
+                ""
+            }
+
+            <img
+                class="surprise-image"
+                src="${item.content}"
+                alt="Recuerdo"
+            >
+
+        `;
+
+    }
+
+
+    /*
+        VIDEO
+    */
+
+    else if (
+        item.type ===
+        "video"
+    ) {
+
+        heart.textContent =
+            "🎥";
+
+
+        content.innerHTML = `
+
+            ${
+                item.message
+                ?
+                `<div class="message">
+                    ${item.message}
+                </div>`
+                :
+                ""
+            }
+
+            <video
+                class="video"
+                controls
+                playsinline
+            >
+
+                <source
+                    src="${item.content}"
+                >
+
+            </video>
+
+        `;
+
+    }
+
+
+    /*
+        ENLACE
+    */
+
+    else if (
+        item.type ===
+        "link"
+    ) {
+
+        heart.textContent =
+            "🎵";
+
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.message}
+            </div>
+
+            <a
+                class="button"
+                href="${item.content}"
+                target="_blank"
+            >
+                Abrir sorpresa ❤️
+            </a>
+
+        `;
+
+    }
+
+
+    /*
+        ❤️ DÍA 24
+    */
+
+    else if (
+        item.type ===
+        "final"
+    ) {
+
+        heart.textContent =
+            "❤️";
+
+
+        content.innerHTML = `
+
+            <div class="final-message">
+
+                ${item.content}
+
+            </div>
+
+        `;
+
+
+        document
+            .getElementById(
+                "modalCard"
+            )
+            .classList.add(
+                "final-card"
+            );
+
+    }
+
+
+    modal.classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* =====================================================
+   ❌ CERRAR
+===================================================== */
+
+
+function closeModal() {
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+
+/* =====================================================
+   CERRAR TOCANDO FUERA
+===================================================== */
+
+
+document
+    .getElementById(
+        "modal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
