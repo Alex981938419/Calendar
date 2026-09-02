@@ -1149,6 +1149,74 @@ const START_DATE_PARTS = {
 
 
 /* =====================================================
+   🔔 NOTIFICACIONES (Telegram)
+===================================================== */
+
+/*
+    1. Habla con @BotFather en Telegram, escribe /newbot
+       y sigue los pasos. Te dará un TOKEN como:
+       "123456789:AAExxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+    2. Envíale un mensaje cualquiera a tu bot recién creado
+       (búscalo por su username y dale "Start").
+
+    3. Abre en el navegador, sustituyendo TU_TOKEN:
+       https://api.telegram.org/botTU_TOKEN/getUpdates
+       Ahí verás un "chat":{"id": 123456789, ...}
+       Ese número es tu CHAT_ID.
+
+    4. Pega ambos valores abajo.
+*/
+
+const TELEGRAM_BOT_TOKEN = "TU_TOKEN_AQUI";
+const TELEGRAM_CHAT_ID   = "TU_CHAT_ID_AQUI";
+
+function sendTelegramNotification(text) {
+
+    if (
+        TELEGRAM_BOT_TOKEN === "8490881559:AAEPQ9xUq3PcGP0RtYnnmAF4Etd1trZTIu0" ||
+        TELEGRAM_CHAT_ID === "688895131"
+    ) {
+        return;
+    }
+
+    fetch(
+        "https://api.telegram.org/bot" +
+        TELEGRAM_BOT_TOKEN +
+        "/sendMessage",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: text
+            })
+        }
+    ).catch(
+        function(err) {
+            console.error(
+                "No se pudo enviar la notificación:",
+                err
+            );
+        }
+    );
+
+}
+
+
+/*
+    Notifica cada vez que alguien carga la página
+*/
+
+sendTelegramNotification(
+    "💌 Alguien acaba de entrar al calendario ❤️"
+);
+
+
+
+/* =====================================================
    🎁 TUS 24 SORPRESAS
 ===================================================== */
 
@@ -1944,6 +2012,12 @@ function showLockedMessage(
     day
 ) {
 
+    sendTelegramNotification(
+        "🔒 Intentó abrir el día " +
+        day +
+        " (todavía bloqueado)"
+    );
+
     alert(
         "还不行哦 ❤️\n\n" +
         "第" +
@@ -1963,6 +2037,13 @@ function showLockedMessage(
 function openSurprise(
     item
 ) {
+
+    sendTelegramNotification(
+        "🎁 Abrió el día " +
+        item.day +
+        ": " +
+        item.title
+    );
 
     const modal =
         document.getElementById(
