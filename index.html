@@ -1173,13 +1173,6 @@ const TELEGRAM_CHAT_ID   = "688895131";
 
 function sendTelegramNotification(text) {
 
-    if (
-        TELEGRAM_BOT_TOKEN === "8490881559:AAEPQ9xUq3PcGP0RtYnnmAF4Etd1trZTIu0" ||
-        TELEGRAM_CHAT_ID === "688895131"
-    ) {
-        return;
-    }
-
     /*
         Se usa GET (en vez de POST con JSON) porque
         un POST con cuerpo JSON obliga al navegador a
