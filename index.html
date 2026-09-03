@@ -1298,15 +1298,18 @@ const surprises = [
     {
         day: 4,
 
-        title: "Día 4 ❤️",
+        title: "第四天 🎵",
 
-        type: "text",
+        type: "audio",
 
         content:
-        "坏女孩！\n\n"+
-        "你比韩剧的剧情还好猜\n"+
-        "我可是永远领先你两步 😏"
+        "set_for_life.m4a",
+
+        message:
+        "我很喜欢这首歌。每当想你的时候，我都会听它。\n" +
+        "我们把它变成属于我们的歌，好吗？❤️"
     },
+
 
 
     {
@@ -2104,6 +2107,32 @@ function openSurprise(
 
     }
 
+    /*
+        AUDIO
+    */
+
+    else if (item.type === "audio") {
+
+        heart.textContent = "🎵";
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.message}
+            </div>
+
+            <audio
+                controls
+                style="width: 100%; margin-top: 15px;"
+            >
+                <source
+                    src="${item.content}"
+                    type="audio/mpeg"
+                >
+            </audio>
+
+        `;
+    }    
 
     /*
         FOTO
