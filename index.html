@@ -1313,18 +1313,14 @@ const surprises = [
 
 
     {
-        day: 5,
-
-        title: "Día 5 ✨",
-
-        type: "text",
-
-        content:
-        "坏女孩！\n\n"+
-        "你比韩剧的剧情还好猜\n"+
-        "我可是永远领先你两步 😏"
-    },
-
+    day: 5,
+    title: "第五天 🔍",
+    type: "猜猜",
+    content: "recorte-dia5.jpg",        // ← tu foto recortada/censurada
+    reveal: "original-dia5.jpg",        // ← tu foto completa
+    guessPrompt: "猜猜这张裁剪图片的时刻 👀",
+    revealMessage: "这是我们第一次见面的那一天，也是我们一起吃的第一顿饭。"   // ← el texto de cuándo es
+    }
 
     {
         day: 6,
@@ -2241,6 +2237,43 @@ function openSurprise(
 
         `;
 
+
+          /*
+        ADIVINA EL MOMENTO
+        (foto recortada -> botón -> foto real + texto)
+    */
+
+    else if (
+        item.type ===
+        "guess"
+    ) {
+
+        heart.textContent =
+            "🔍";
+
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.guessPrompt}
+            </div>
+
+            <img
+                class="surprise-image"
+                id="guessImage"
+                src="${item.content}"
+                alt="Adivina el momento"
+            >
+
+            <button
+                class="button"
+                id="guessButton"
+                style="border:none;cursor:pointer;font-size:16px;"
+            >
+                Adivinar ❤️
+            </button>
+
+        `;
     }
 
 
