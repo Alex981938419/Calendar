@@ -1313,14 +1313,15 @@ const surprises = [
 
 
     {
-          day: 5,
-          title: "第五天 🔍",
-          type: "guess",
-          content: "recorte-dia5.jpg",        // ← tu foto recortada/censurada
-          reveal: "original-dia5.jpg",        // ← tu foto completa
-          guessPrompt: "猜猜这张裁剪图片的时刻 👀",
-          revealMessage: "这是我们第一次见面的那一天，也是我们一起吃的第一顿饭。"   // ← el texto de cuándo es
+        day: 5,
+        title: "第五天 🔍",
+        type: "guess",
+        content: "recorte-dia5.jpg",        
+        reveal: "original-dia5.jpg",       
+        guessPrompt: "猜猜这张裁剪图片的时刻 👀",
+        revealMessage: "这是我们第一次见面的那一天，也是我们一起吃的第一顿饭。😋"   // ← el texto de cuándo es
     },
+
 
     {
         day: 6,
@@ -2238,33 +2239,34 @@ function openSurprise(
         `;
 
     }
-          /*
+
+    /*
         ADIVINA EL MOMENTO
         (foto recortada -> botón -> foto real + texto)
-          */
-
+    */
+ 
     else if (
         item.type ===
         "guess"
     ) {
-
+ 
         heart.textContent =
             "🔍";
-
-
+ 
+ 
         content.innerHTML = `
-
+ 
             <div class="message">
                 ${item.guessPrompt}
             </div>
-
+ 
             <img
                 class="surprise-image"
                 id="guessImage"
                 src="${item.content}"
                 alt="Adivina el momento"
             >
-
+ 
             <button
                 class="button"
                 id="guessButton"
@@ -2272,8 +2274,45 @@ function openSurprise(
             >
                 猜猜 ❤️
             </button>
-
+ 
         `;
+ 
+ 
+        document
+            .getElementById(
+                "guessButton"
+            )
+            .addEventListener(
+                "click",
+                function() {
+ 
+                    document
+                        .getElementById(
+                            "guessImage"
+                        )
+                        .src =
+                            item.reveal;
+ 
+                    this.remove();
+ 
+                    const revealMsg =
+                        document.createElement(
+                            "div"
+                        );
+ 
+                    revealMsg.className =
+                        "message";
+ 
+                    revealMsg.textContent =
+                        item.revealMessage;
+ 
+                    content.appendChild(
+                        revealMsg
+                    );
+ 
+                }
+            );
+ 
     }
 
 
