@@ -829,6 +829,236 @@ h1 {
 
 
 /* =====================================================
+   MINIJUEGO (día 6)
+===================================================== */
+
+.game-area {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 320px;
+
+    border-radius: 20px;
+
+    background-color: #fdf6ee;
+
+    background-image:
+
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            transparent 76%,
+            #b97b3f 76%,
+            #8a5828 100%
+        ),
+
+        repeating-linear-gradient(
+            0deg,
+            rgba(120,90,70,.10) 0px,
+            rgba(120,90,70,.10) 1px,
+            transparent 1px,
+            transparent 34px
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            rgba(120,90,70,.10) 0px,
+            rgba(120,90,70,.10) 1px,
+            transparent 1px,
+            transparent 34px
+        );
+
+    background-size: cover;
+
+    background-position: center;
+
+    overflow: hidden;
+
+    margin: 15px 0;
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(180,100,120,.15);
+
+    touch-action: none;
+}
+
+/*
+    Si se carga una foto real de fondo (ver JS,
+    variable BACKGROUNDS más abajo), esta clase
+    sustituye el patrón de azulejos por la foto.
+*/
+
+.game-area.has-photo-bg {
+
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.08)
+        ),
+        var(--bg-photo);
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+.game-item {
+
+    position: absolute;
+
+    bottom: -50px;
+
+    width: 56px;
+
+    height: 56px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    user-select: none;
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(
+            0 5px 9px
+            rgba(120,60,80,.35)
+        );
+
+    animation-name: arcFly;
+
+    animation-timing-function: ease-out;
+
+    animation-fill-mode: forwards;
+
+    will-change: transform;
+}
+
+.game-item.bomb {
+    filter:
+        drop-shadow(
+            0 5px 9px
+            rgba(180,40,30,.45)
+        )
+        saturate(1.4);
+}
+
+@keyframes arcFly {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(var(--peak, -260px)) rotate(180deg);
+    }
+
+    100% {
+        transform: translateY(40px) rotate(320deg);
+    }
+}
+
+
+.game-item.sliced {
+
+    animation: sliceItem .3s ease forwards !important;
+
+    pointer-events: none;
+}
+
+@keyframes sliceItem {
+
+    to {
+        transform: scale(1.6) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.game-item.bomb-hit {
+
+    animation: bombHit .35s ease forwards !important;
+
+    pointer-events: none;
+}
+
+@keyframes bombHit {
+
+    0% {
+        filter: brightness(1);
+    }
+
+    40% {
+        transform: scale(1.5);
+        filter: brightness(2) saturate(2);
+    }
+
+    100% {
+        transform: scale(0.4);
+        opacity: 0;
+    }
+}
+
+.game-area.shake {
+    animation: areaShake .3s ease;
+}
+
+@keyframes areaShake {
+
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+.game-trail-canvas {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+.game-hud {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 14px;
+
+    color: #9a5267;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+}
+
+.game-result {
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #67434d;
+
+    margin-top: 10px;
+}
+
+
+/* =====================================================
    ÚLTIMO DÍA
 ===================================================== */
 
@@ -1225,6 +1455,8 @@ sendTelegramNotification(
     "image" → fotografía
     "video" → vídeo
     "link"  → enlace
+    "guess" → adivina el momento
+    "ninja" → minijuego (día 6: corta la fusión España-China)
 
 */
 
@@ -1323,17 +1555,57 @@ const surprises = [
     },
 
 
+    /*
+        DÍA 6: minijuego "corta la fusión"
+        (España + China, estilo Fruit Ninja)
+
+        Cada elemento usa una IMAGEN tuya (PNG/JPG con
+        fondo transparente a ser posible). Pon los archivos
+        en la misma carpeta que este .html y sustituye el
+        nombre en "img" por el tuyo.
+        Mientras no subas la imagen real, se muestra
+        automáticamente un icono de relleno con el emoji
+        indicado en "fallback".
+    */
+
     {
         day: 6,
 
-        title: "Día 6 🥰",
+        title: "第六天 🔪",
 
-        type: "text",
+        type: "ninja",
 
-        content:
-        "坏女孩！\n\n"+
-        "你比韩剧的剧情还好猜\n"+
-        "我可是永远领先你两步 😏"
+        intro:
+        "今天我为你准备了一个小游戏！\n" + 
+        "滑动手指，试着切开那些代表中国和西班牙美食的表情符号。\n" +
+        "但要小心辣椒哦！！！",
+
+        goodItems: [
+
+            { img: "jamon.png",     fallback: "🍖" },
+            { img: "tortilla.jpg",  fallback: "🍳" },
+            { img: "paella.png",    fallback: "🥘" },
+            { img: "dumpling.png",  fallback: "🥟" },
+            { img: "bubbletea.png", fallback: "🍷" },
+            { img: "fideos.png",    fallback: "🍜" },
+            { img: "galleta.png",   fallback: "🥠" }
+
+        ],
+
+        bombItem: { img: "chile.png", fallback: "🌶️" },
+
+        /*
+        */
+        background: "cocina.jpg",
+
+        duration: 20,
+
+        results: [
+
+            { min: 0,  message: "还需要多练练～\n就像西班牙和中国之间的距离，得慢慢适应 🇪🇸🇨🇳" },
+
+            { min: 8,  message: "好家伙，这速度可以去当厨师了 👨‍🍳" },
+        ]
     },
 
 
@@ -2317,6 +2589,58 @@ function openSurprise(
 
 
     /*
+        🎮 MINIJUEGO: CORTA LA FUSIÓN (España + China, estilo Fruit Ninja)
+    */
+
+    else if (
+        item.type ===
+        "ninja"
+    ) {
+
+        heart.textContent =
+            "🔪";
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.intro}
+            </div>
+
+            <div class="game-hud">
+                <span id="gameScore">🍽️ 0</span>
+                <span id="gameTimer">⏱️ ${item.duration}s</span>
+            </div>
+
+            <div class="game-area" id="gameArea"></div>
+
+            <button
+                class="button"
+                id="gameStartBtn"
+                style="border:none;cursor:pointer;font-size:16px;"
+            >
+                开始游戏 🔪
+            </button>
+
+            <div class="game-result" id="gameResult"></div>
+
+        `;
+
+        document
+            .getElementById("gameStartBtn")
+            .addEventListener("click", function() {
+
+                this.remove();
+
+                startFusionGame(item);
+
+            });
+
+        applyGameBackground(item);
+
+    }
+
+
+    /*
         ❤️ DÍA 24
     */
 
@@ -2354,6 +2678,414 @@ function openSurprise(
     modal.classList.add(
         "show"
     );
+
+}
+
+
+
+/* =====================================================
+   🍳 FONDO DEL ÁREA DE JUEGO (foto de cocina opcional)
+===================================================== */
+
+
+function applyGameBackground(item) {
+
+    if (!item.background) return;
+
+    const area =
+        document.getElementById("gameArea");
+
+    if (!area) return;
+
+    const testImg =
+        new Image();
+
+    testImg.onload = function() {
+
+        area.style.setProperty(
+            "--bg-photo",
+            "url('" + item.background + "')"
+        );
+
+        area.classList.add("has-photo-bg");
+
+    };
+
+    testImg.onerror = function() {
+
+        /*
+            No pasa nada: se queda el fondo de
+            azulejos + encimera dibujado con CSS.
+        */
+
+    };
+
+    testImg.src =
+        item.background;
+
+}
+
+
+
+/* =====================================================
+   🎮 LÓGICA DEL MINIJUEGO "CORTA LA FUSIÓN"
+   (estilo Fruit Ninja: comida española + china)
+===================================================== */
+
+
+function startFusionGame(item) {
+
+    const area =
+        document.getElementById("gameArea");
+
+    const scoreLabel =
+        document.getElementById("gameScore");
+
+    const timerLabel =
+        document.getElementById("gameTimer");
+
+    const resultBox =
+        document.getElementById("gameResult");
+
+    let score = 0;
+
+    let timeLeft = item.duration;
+
+    let spawnInterval;
+
+    let timerInterval;
+
+    let gameOver = false;
+
+    let dragging = false;
+
+
+    /*
+        🔪 ESTELA BLANCA DEL CUCHILLO (estilo Fruit Ninja)
+    */
+
+    const trailCanvas =
+        document.createElement("canvas");
+
+    trailCanvas.className =
+        "game-trail-canvas";
+
+    trailCanvas.width =
+        area.clientWidth || 280;
+
+    trailCanvas.height =
+        area.clientHeight || 320;
+
+    area.appendChild(trailCanvas);
+
+    const trailCtx =
+        trailCanvas.getContext("2d");
+
+    let trailPoints = [];
+
+    let trailAnimId = null;
+
+    const TRAIL_LIFETIME = 160;
+
+
+    function recordTrailPoint(clientX, clientY) {
+
+        const rect =
+            area.getBoundingClientRect();
+
+        trailPoints.push({
+            x: clientX - rect.left,
+            y: clientY - rect.top,
+            t: performance.now()
+        });
+
+    }
+
+
+    function drawTrailFrame() {
+
+        if (gameOver) {
+
+            trailCtx.clearRect(
+                0, 0,
+                trailCanvas.width,
+                trailCanvas.height
+            );
+
+            return;
+
+        }
+
+        const now =
+            performance.now();
+
+        trailPoints =
+            trailPoints.filter(
+                p => now - p.t < TRAIL_LIFETIME
+            );
+
+        trailCtx.clearRect(
+            0, 0,
+            trailCanvas.width,
+            trailCanvas.height
+        );
+
+        if (trailPoints.length > 1) {
+
+            trailCtx.lineCap = "round";
+
+            trailCtx.shadowColor = "rgba(255,255,255,.9)";
+
+            trailCtx.shadowBlur = 10;
+
+            for (let i = 1; i < trailPoints.length; i++) {
+
+                const p0 = trailPoints[i - 1];
+
+                const p1 = trailPoints[i];
+
+                const age =
+                    now - p1.t;
+
+                const alpha =
+                    Math.max(0, 1 - age / TRAIL_LIFETIME);
+
+                trailCtx.strokeStyle =
+                    "rgba(255,255,255," + alpha + ")";
+
+                trailCtx.lineWidth =
+                    5 * alpha + 1;
+
+                trailCtx.beginPath();
+
+                trailCtx.moveTo(p0.x, p0.y);
+
+                trailCtx.lineTo(p1.x, p1.y);
+
+                trailCtx.stroke();
+
+            }
+
+        }
+
+        trailAnimId =
+            requestAnimationFrame(drawTrailFrame);
+
+    }
+
+
+    trailAnimId =
+        requestAnimationFrame(drawTrailFrame);
+
+
+    area.addEventListener("pointermove", function(e) {
+
+        if (!dragging) return;
+
+        recordTrailPoint(e.clientX, e.clientY);
+
+    });
+
+
+    function spawnItem() {
+
+        if (gameOver) return;
+
+        const el =
+            document.createElement("img");
+
+        const isBomb =
+            Math.random() < 0.22;
+
+        const chosen =
+            isBomb
+            ? item.bombItem
+            : item.goodItems[
+                Math.floor(Math.random() * item.goodItems.length)
+            ];
+
+        el.className =
+            "game-item" + (isBomb ? " bomb" : "");
+
+        el.alt = "";
+
+        el.src = chosen.img;
+
+        el.addEventListener("error", function handler() {
+
+            el.removeEventListener("error", handler);
+
+            el.src =
+                makeFallbackSticker(
+                    chosen.fallback,
+                    isBomb ? "#ffd9d0" : "#ffe0e6"
+                );
+
+        });
+
+        const areaWidth =
+            area.clientWidth || 280;
+
+        const areaHeight =
+            area.clientHeight || 320;
+
+        const leftPos =
+            20 + Math.random() * (areaWidth - 60);
+
+        el.style.left =
+            leftPos + "px";
+
+        const peak =
+            -(areaHeight * (0.55 + Math.random() * 0.35));
+
+        el.style.setProperty("--peak", peak + "px");
+
+        const flyTime =
+            1.5 + Math.random() * 0.6;
+
+        el.style.animationDuration =
+            flyTime + "s";
+
+        el.dataset.sliced = "false";
+
+        function trySlice() {
+
+            if (gameOver) return;
+
+            if (el.dataset.sliced === "true") return;
+
+            el.dataset.sliced = "true";
+
+            if (isBomb) {
+
+                el.classList.add("bomb-hit");
+
+                score = Math.max(0, score - 3);
+
+                area.classList.add("shake");
+
+                setTimeout(function() {
+                    area.classList.remove("shake");
+                }, 300);
+
+            } else {
+
+                el.classList.add("sliced");
+
+                score += 1;
+
+            }
+
+            scoreLabel.textContent = "🍽️ " + score;
+
+            setTimeout(function() {
+                el.remove();
+            }, 350);
+
+        }
+
+        el.addEventListener("pointerenter", function() {
+
+            if (dragging) trySlice();
+
+        });
+
+        el.addEventListener("click", trySlice);
+
+        el.addEventListener("animationend", function() {
+
+            if (el.dataset.sliced === "false") {
+
+                el.remove();
+
+            }
+
+        });
+
+        area.appendChild(el);
+
+    }
+
+
+    area.addEventListener("pointerdown", function() {
+        dragging = true;
+    });
+
+    window.addEventListener("pointerup", function() {
+        dragging = false;
+    });
+
+    area.addEventListener("pointerleave", function() {
+        dragging = false;
+    });
+
+
+    spawnInterval =
+        setInterval(spawnItem, 480);
+
+
+    timerInterval =
+        setInterval(function() {
+
+            timeLeft--;
+
+            timerLabel.textContent =
+                "⏱️ " + timeLeft + "s";
+
+            if (timeLeft <= 0) {
+
+                endGame();
+
+            }
+
+        }, 1000);
+
+
+    function endGame() {
+
+        gameOver = true;
+
+        clearInterval(spawnInterval);
+
+        clearInterval(timerInterval);
+
+        if (trailAnimId) cancelAnimationFrame(trailAnimId);
+
+        trailCtx.clearRect(
+            0, 0,
+            trailCanvas.width,
+            trailCanvas.height
+        );
+
+        area.querySelectorAll(".game-item").forEach(
+            function(el) {
+                el.remove();
+            }
+        );
+
+        let finalMessage =
+            item.results[0].message;
+
+        item.results.forEach(function(tier) {
+
+            if (score >= tier.min) {
+
+                finalMessage = tier.message;
+
+            }
+
+        });
+
+        resultBox.textContent =
+            "最终得分: " + score + " 🍽️\n\n" + finalMessage;
+
+        sendTelegramNotification(
+            "🔪 Jugó al minijuego del día 6 y consiguió " +
+            score +
+            " puntos"
+        );
+
+    }
 
 }
 
