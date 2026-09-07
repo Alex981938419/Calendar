@@ -1457,6 +1457,7 @@ sendTelegramNotification(
     "link"  → enlace
     "guess" → adivina el momento
     "ninja" → minijuego (día 6: corta la fusión España-China)
+    "flappy" → minijuego (día 8: vuela de España a China)
 
 */
 
@@ -1571,22 +1572,22 @@ const surprises = [
     {
         day: 6,
 
-        title: "第六天 🔪",
+        title: "第六天 🥢🍷",
 
         type: "ninja",
 
         intro:
-        "今天我为你准备了一个小游戏！\n" + 
-        "滑动手指，试着切开那些代表中国和西班牙美食的表情符号。\n" +
-        "但要小心辣椒哦！！！",
+        "小游戏时间！\n" +
+        "西班牙的和中国的美食都飞起来了，快用手指划过去切开它们吧！\n" +
+        "小心辣椒 🌶️，别切到哦～",
 
         goodItems: [
 
             { img: "jamon.png",     fallback: "🍖" },
-            { img: "tortilla.jpg",  fallback: "🍳" },
+            { img: "tortilla.png",  fallback: "🍳" },
             { img: "paella.png",    fallback: "🥘" },
             { img: "dumpling.png",  fallback: "🥟" },
-            { img: "bubbletea.png", fallback: "🍷" },
+            { img: "bubbletea.png", fallback: "🧋" },
             { img: "fideos.png",    fallback: "🍜" },
             { img: "galleta.png",   fallback: "🥠" }
 
@@ -1595,6 +1596,11 @@ const surprises = [
         bombItem: { img: "chile.png", fallback: "🌶️" },
 
         /*
+            Foto de fondo del área de juego (opcional).
+            Pon aquí el nombre de una foto de cocina y
+            colócala en la misma carpeta que este .html.
+            Si no la subes, se ve un fondo de azulejos +
+            encimera de madera dibujado con CSS.
         */
         background: "cocina.jpg",
 
@@ -1604,7 +1610,12 @@ const surprises = [
 
             { min: 0,  message: "还需要多练练～\n就像西班牙和中国之间的距离，得慢慢适应 🇪🇸🇨🇳" },
 
-            { min: 8,  message: "好家伙，这速度可以去当厨师了 👨‍🍳" },
+            { min: 8,  message: "不错！手速比高铁还快，比飞机去马德里还准 ✈️" },
+
+            { min: 16, message: "哇，两边的美食都被你征服了！\n看来以后我们家的厨房要中西合璧了 🥘🥟" },
+
+            { min: 25, message: "满分！雷神下凡！\n西班牙火腿和中国饺子都被你切服气了 😆🇪🇸🇨🇳" }
+
         ]
     },
 
@@ -1612,24 +1623,7 @@ const surprises = [
     {
         day: 7,
 
-        title: "第七天 🎭",
-
-        type: "text",
-
-        content:
-        "星期一了，今天来个小笑话，也许能让你开心一下\n"+
-        "我记得你很喜欢“番茄为什么不喝咖啡？因为它喝茶”的笑话\n"+
-        "那再来一个\n"+
-        "🏠 屋顶对另一个屋顶说：Techo de menos.\n"+
-        "这是一个文字游戏\n"+
-        "“techo”（屋顶）和 “te echo” 发音很像。\n"+
-        "所以屋顶说：“我想你了！” 😉😂"
-    },
-
-    {
-        day: 8,
-
-        title: "Día 8 💕",
+        title: "Día 7 📷",
 
         type: "text",
 
@@ -1637,6 +1631,71 @@ const surprises = [
         "坏女孩！\n\n"+
         "你比韩剧的剧情还好猜\n"+
         "我可是永远领先你两步 😏"
+    },
+
+    /*
+        DÍA 8: minijuego "vuela a China"
+        (estilo Flappy Bird: el avión eres tú,
+        volando desde España hasta donde está ella)
+
+        TODAS las imágenes son opcionales. Ponlas en la
+        misma carpeta que este .html con estos nombres
+        (o cambia el nombre aquí abajo por el tuyo).
+        Mientras no subas una imagen, se ve un dibujo
+        de relleno automático en su lugar.
+    */
+
+    {
+        day: 8,
+
+        title: "第八天 ✈️",
+
+        type: "flappy",
+
+        intro:
+        "既然上一个小游戏把你折腾得够呛，那我倒要看看你有多喜欢这个。！\n" +
+        "这就是我从西班牙坐飞机去见你的样子。\n" +
+        "可千万小心，别让我坠机了！！",
+
+        planeImg: "avion.jpg",
+
+        planeFallback: "✈️",
+
+        startImg: "bandera_espana.jpg",
+
+        startFallback: "🇪🇸",
+
+        goalImg: "bandera_china.jpg",
+
+        goalFallback: "🇨🇳",
+
+        background: "cielo.jpg",
+
+        /*
+            Un tramo de comida/paisaje por cada zona
+            del viaje (España → Europa → Rusia → China).
+            Pon aquí el nombre de tu foto para cada tramo.
+        */
+        buildings: [
+
+            { img: "espana.jpg" },
+            { img: "europa.jpg" },
+            { img: "rusia.jpg" },
+            { img: "china.jpg" }
+
+        ],
+
+        results: [
+
+            { min: 0, message: "刚起飞就掉下来了～\n再试一次，我这次一定能飞过去" },
+
+            { min: 3, message: "飞出去一点了，但被云挡住了半路\n继续加油，中国不远了" },
+
+            { min: 6, message: "飞得真远！已经能看到长城的影子了 🏯" },
+
+            { min: 8, message: "成功降落中国！\n从西班牙飞过来，比想象中还刺激 😆✈️🇪🇸🇨🇳" }
+
+        ]
     },
 
 
@@ -2645,6 +2704,58 @@ function openSurprise(
 
 
     /*
+        🎮 MINIJUEGO: VUELA A CHINA (estilo Flappy Bird)
+    */
+
+    else if (
+        item.type ===
+        "flappy"
+    ) {
+
+        heart.textContent =
+            "✈️";
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.intro}
+            </div>
+
+            <div class="game-hud">
+                <span id="gameScore">✈️ 0</span>
+                <span id="gameTimer">🇪🇸 0% 🇨🇳</span>
+            </div>
+
+            <div class="game-area" id="gameArea"></div>
+
+            <button
+                class="button"
+                id="gameStartBtn"
+                style="border:none;cursor:pointer;font-size:16px;"
+            >
+                开始飞行 ✈️
+            </button>
+
+            <div class="game-result" id="gameResult"></div>
+
+        `;
+
+        document
+            .getElementById("gameStartBtn")
+            .addEventListener("click", function() {
+
+                this.remove();
+
+                startFlappyGame(item);
+
+            });
+
+        applyFlappyBackground(item);
+
+    }
+
+
+    /*
         ❤️ DÍA 24
     */
 
@@ -2726,6 +2837,1255 @@ function applyGameBackground(item) {
 
     testImg.src =
         item.background;
+
+}
+
+
+
+/* =====================================================
+   ☁️ FONDO DEL JUEGO "VUELA A CHINA" (cielo opcional)
+===================================================== */
+
+
+function applyFlappyBackground(item) {
+
+    const area =
+        document.getElementById("gameArea");
+
+    if (!area) return;
+
+    /*
+        Fondo de cielo dibujado por defecto
+    */
+
+    area.style.backgroundImage =
+        "linear-gradient(180deg, #8ec9f0 0%, #cfe9ff 55%, #fef6e4 100%)";
+
+    area.style.backgroundSize =
+        "cover";
+
+    area.style.backgroundPosition =
+        "center";
+
+    if (!item.background) return;
+
+    const testImg =
+        new Image();
+
+    testImg.onload = function() {
+
+        area.style.backgroundImage =
+            "linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.15)), url('" +
+            item.background +
+            "')";
+
+    };
+
+    testImg.src =
+        item.background;
+
+}
+
+
+
+/* =====================================================
+   🖼️ CARGA DE IMAGEN CON FALLBACK A EMOJI (canvas)
+===================================================== */
+
+
+function loadCanvasSprite(src) {
+
+    const sprite = {
+        img: new Image(),
+        loaded: false
+    };
+
+    sprite.img.onload = function() {
+        sprite.loaded = true;
+    };
+
+    sprite.img.src = src;
+
+    return sprite;
+
+}
+
+
+
+/* =====================================================
+   🎮 LÓGICA DEL MINIJUEGO "VUELA A CHINA"
+   (estilo Flappy Bird)
+===================================================== */
+
+
+function startFlappyGame(item) {
+
+    let area =
+        document.getElementById("gameArea");
+
+    const scoreLabel =
+        document.getElementById("gameScore");
+
+    const progressLabel =
+        document.getElementById("gameTimer");
+
+    const resultBox =
+        document.getElementById("gameResult");
+
+    resultBox.innerHTML =
+        "";
+
+    /*
+        Se sustituye el nodo por un clon limpio
+        para no acumular listeners entre reintentos
+    */
+
+    const freshArea =
+        area.cloneNode(false);
+
+    area.parentNode.replaceChild(
+        freshArea,
+        area
+    );
+
+    area = freshArea;
+
+
+    const canvas =
+        document.createElement("canvas");
+
+    canvas.className =
+        "game-trail-canvas";
+
+    canvas.style.pointerEvents =
+        "none";
+
+    canvas.width =
+        area.clientWidth || 300;
+
+    canvas.height =
+        area.clientHeight || 320;
+
+    area.appendChild(canvas);
+
+    const ctx =
+        canvas.getContext("2d");
+
+    const W = canvas.width;
+
+    const H = canvas.height;
+
+
+    const planeX = 55;
+
+    const gravity = 0.32;
+
+    const flapPower = -6;
+
+    const pillarWidth = 50;
+
+    const gapHeight =
+        Math.max(105, H * 0.36);
+
+    const pillarSpacing = 215;
+
+    const scrollSpeed = 2.5;
+
+    const totalObstacles = 8;
+
+
+    let planeY = H / 2;
+
+    let velocity = 0;
+
+    let started = false;
+
+    let gameOver = false;
+
+    let score = 0;
+
+    let rafId = null;
+
+    let pillars = [];
+
+    let finish = null;
+
+    let start = null;
+
+    let planeParticles = [];
+
+    let hillOffset = 0;
+
+
+    const planeSprite =
+        loadCanvasSprite(item.planeImg);
+
+    const startSprite =
+        loadCanvasSprite(item.startImg);
+
+    const goalSprite =
+        loadCanvasSprite(item.goalImg);
+
+
+    const buildingImgs =
+        item.buildings || [];
+
+
+    /* =====================================================
+        🗺️ REGIONES DEL VIAJE
+        (España -> Europa -> Rusia -> China)
+        Cada tramo cambia el color del cielo y, si has
+        subido una foto en "buildings" del día 8, se usa
+        esa foto para el edificio/paisaje de ese tramo.
+    ===================================================== */
+
+    const regions = [
+
+        {
+            name: "España",
+            style: "spain",
+            base: "#d98a4f",
+            accent: "#8c5a2b",
+            sky: ["#8ec9f0", "#fef6e4"],
+            sprite: loadCanvasSprite(
+                buildingImgs[0] && buildingImgs[0].img
+            )
+        },
+
+        {
+            name: "Europa",
+            style: "europe",
+            base: "#8b95a1",
+            accent: "#4a5560",
+            sky: ["#9fb9d8", "#eef2f7"],
+            sprite: loadCanvasSprite(
+                buildingImgs[1] && buildingImgs[1].img
+            )
+        },
+
+        {
+            name: "Rusia",
+            style: "russia",
+            base: "#c0392b",
+            accent: "#f1c40f",
+            sky: ["#7fa2c9", "#dbe6f2"],
+            sprite: loadCanvasSprite(
+                buildingImgs[2] && buildingImgs[2].img
+            )
+        },
+
+        {
+            name: "China",
+            style: "china",
+            base: "#c0392b",
+            accent: "#f4d35e",
+            sky: ["#f4a261", "#ffe3c2"],
+            sprite: loadCanvasSprite(
+                buildingImgs[3] && buildingImgs[3].img
+            )
+        }
+
+    ];
+
+
+    function regionForIndex(i) {
+
+        const perRegion =
+            totalObstacles / regions.length;
+
+        const idx =
+            Math.min(
+                regions.length - 1,
+                Math.floor(i / perRegion)
+            );
+
+        return regions[idx];
+
+    }
+
+
+    function hexToRgb(hex) {
+
+        const clean =
+            hex.replace("#", "");
+
+        return {
+            r: parseInt(clean.substring(0, 2), 16),
+            g: parseInt(clean.substring(2, 4), 16),
+            b: parseInt(clean.substring(4, 6), 16)
+        };
+
+    }
+
+
+    function lerp(a, b, t) {
+        return a + (b - a) * t;
+    }
+
+
+    function lerpColor(hexA, hexB, t) {
+
+        const a = hexToRgb(hexA);
+
+        const b = hexToRgb(hexB);
+
+        const r = Math.round(lerp(a.r, b.r, t));
+
+        const g = Math.round(lerp(a.g, b.g, t));
+
+        const bl = Math.round(lerp(a.b, b.b, t));
+
+        return "rgb(" + r + "," + g + "," + bl + ")";
+
+    }
+
+
+    function currentSkyColors(progressFrac) {
+
+        const steps =
+            regions.length - 1;
+
+        const pos =
+            Math.max(0, Math.min(1, progressFrac)) * steps;
+
+        const i0 =
+            Math.min(steps, Math.floor(pos));
+
+        const i1 =
+            Math.min(steps, i0 + 1);
+
+        const t =
+            pos - i0;
+
+        return {
+            top: lerpColor(regions[i0].sky[0], regions[i1].sky[0], t),
+            bottom: lerpColor(regions[i0].sky[1], regions[i1].sky[1], t)
+        };
+
+    }
+
+
+    function resetTrack() {
+
+        pillars = [];
+
+        for (let i = 0; i < totalObstacles; i++) {
+
+            const margin = 55;
+
+            const gapY =
+                margin +
+                Math.random() * (H - margin * 2 - gapHeight);
+
+            pillars.push({
+                x: W + 80 + i * pillarSpacing,
+                gapY: gapY,
+                passed: false,
+                region: regionForIndex(i)
+            });
+
+        }
+
+        finish = {
+            x: pillars[pillars.length - 1].x + pillarSpacing * 0.85
+        };
+
+        start = {
+            x: 26
+        };
+
+    }
+
+
+    resetTrack();
+
+
+    /*
+        🏔️ COLINAS DE FONDO (parallax, solo decorativas)
+    */
+
+    function drawHills() {
+
+        const baseY =
+            H - 34;
+
+        const amplitude = 9;
+
+        const wavelength = 95;
+
+        ctx.fillStyle =
+            "rgba(90,110,95,.22)";
+
+        ctx.beginPath();
+
+        ctx.moveTo(0, H);
+
+        for (let x = 0; x <= W; x += 12) {
+
+            const y =
+                baseY +
+                Math.sin((x + hillOffset) / wavelength) * amplitude;
+
+            ctx.lineTo(x, y);
+
+        }
+
+        ctx.lineTo(W, H);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+    }
+
+
+    /*
+        💨 ESTELA DEL AVIÓN (pequeñas partículas)
+    */
+
+    function updateAndDrawPlaneTrail() {
+
+        planeParticles.forEach(function(p) {
+
+            p.x -= scrollSpeed;
+
+            p.life -= 0.045;
+
+        });
+
+        planeParticles =
+            planeParticles.filter(
+                p => p.life > 0
+            );
+
+        planeParticles.forEach(function(p) {
+
+            ctx.fillStyle =
+                "rgba(255,255,255," + (p.life * 0.55) + ")";
+
+            ctx.beginPath();
+
+            ctx.arc(
+                p.x, p.y,
+                3 * p.life + 1,
+                0, Math.PI * 2
+            );
+
+            ctx.fill();
+
+        });
+
+    }
+
+
+    function roundRectPath(x, y, w, h, r) {
+
+        const rr =
+            Math.max(0, Math.min(r, w / 2, h / 2));
+
+        ctx.beginPath();
+
+        ctx.moveTo(x + rr, y);
+
+        ctx.arcTo(x + w, y, x + w, y + h, rr);
+
+        ctx.arcTo(x + w, y + h, x, y + h, rr);
+
+        ctx.arcTo(x, y + h, x, y, rr);
+
+        ctx.arcTo(x, y, x + w, y, rr);
+
+        ctx.closePath();
+
+    }
+
+
+    /*
+        ☁️ OBSTÁCULO SUPERIOR: nube (tintada según la región)
+    */
+
+    function drawCloudPillar(x, y, w, h, region) {
+
+        if (h <= 0) return;
+
+        ctx.fillStyle =
+            "rgba(255,255,255,.92)";
+
+        ctx.strokeStyle =
+            region.accent + "88";
+
+        ctx.lineWidth = 2;
+
+        const edgeY =
+            y + h;
+
+        const lobes = 3;
+
+        const lobeW =
+            w / lobes;
+
+        ctx.beginPath();
+
+        ctx.moveTo(x, y);
+
+        ctx.lineTo(x + w, y);
+
+        ctx.lineTo(x + w, edgeY - lobeW * 0.55);
+
+        for (let i = lobes - 1; i >= 0; i--) {
+
+            const cx =
+                x + i * lobeW + lobeW / 2;
+
+            ctx.arc(
+                cx,
+                edgeY - lobeW * 0.55,
+                lobeW / 2 + 5,
+                0,
+                Math.PI,
+                false
+            );
+
+        }
+
+        ctx.lineTo(x, y);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+        ctx.stroke();
+
+    }
+
+
+    /*
+        🏰 OBSTÁCULO INFERIOR: monumento/edificio
+        según la región (España, Europa, Rusia, China)
+    */
+
+    function drawBuilding(x, yTop, w, h, region) {
+
+        if (h <= 0) return;
+
+        if (region.sprite && region.sprite.loaded) {
+
+            ctx.drawImage(
+                region.sprite.img,
+                x, yTop, w, h
+            );
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,.5)";
+
+            ctx.lineWidth = 2;
+
+            ctx.strokeRect(x, yTop, w, h);
+
+            return;
+
+        }
+
+        if (region.style === "spain") {
+
+            drawSpainBuilding(x, yTop, w, h, region);
+
+        } else if (region.style === "europe") {
+
+            drawEuropeTower(x, yTop, w, h, region);
+
+        } else if (region.style === "russia") {
+
+            drawRussiaBuilding(x, yTop, w, h, region);
+
+        } else {
+
+            drawChinaBuilding(x, yTop, w, h, region);
+
+        }
+
+    }
+
+
+    function drawSpainBuilding(x, yTop, w, h, region) {
+
+        ctx.fillStyle = region.base;
+
+        ctx.fillRect(x, yTop, w, h);
+
+        const teeth = 4;
+
+        const toothW = w / (teeth * 2);
+
+        ctx.fillStyle = region.accent;
+
+        for (let t = 0; t < teeth; t++) {
+
+            ctx.fillRect(
+                x + t * 2 * toothW,
+                yTop - 9,
+                toothW,
+                9
+            );
+
+        }
+
+        ctx.fillStyle = "rgba(255,255,255,.45)";
+
+        for (let wy = yTop + 22; wy < yTop + h - 14; wy += 30) {
+
+            ctx.fillRect(x + w / 2 - 4, wy, 8, 14);
+
+        }
+
+    }
+
+
+    function drawEuropeTower(x, yTop, w, h, region) {
+
+        ctx.fillStyle = region.base;
+
+        ctx.beginPath();
+
+        ctx.moveTo(x, yTop + h);
+
+        ctx.lineTo(x + w * 0.18, yTop);
+
+        ctx.lineTo(x + w * 0.82, yTop);
+
+        ctx.lineTo(x + w, yTop + h);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+        ctx.strokeStyle = region.accent;
+
+        ctx.lineWidth = 1;
+
+        for (let ly = yTop + 12; ly < yTop + h; ly += 20) {
+
+            const frac = (ly - yTop) / h;
+
+            const half = w * (0.18 + 0.32 * frac);
+
+            const cx = x + w / 2;
+
+            ctx.beginPath();
+
+            ctx.moveTo(cx - half, ly);
+
+            ctx.lineTo(cx + half, ly);
+
+            ctx.stroke();
+
+        }
+
+    }
+
+
+    function drawRussiaBuilding(x, yTop, w, h, region) {
+
+        ctx.fillStyle = "#f5ecd7";
+
+        ctx.fillRect(x, yTop + 18, w, h - 18);
+
+        const cx = x + w / 2;
+
+        ctx.fillStyle = region.base;
+
+        ctx.beginPath();
+
+        ctx.ellipse(cx, yTop, w * 0.34, 14, 0, 0, Math.PI * 2);
+
+        ctx.fill();
+
+        ctx.fillStyle = region.accent;
+
+        ctx.beginPath();
+
+        ctx.moveTo(cx, yTop - 26);
+
+        ctx.quadraticCurveTo(cx - w * 0.3, yTop - 12, cx, yTop + 4);
+
+        ctx.quadraticCurveTo(cx + w * 0.3, yTop - 12, cx, yTop - 26);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+        ctx.strokeStyle = region.accent;
+
+        ctx.beginPath();
+
+        ctx.moveTo(cx, yTop - 26);
+
+        ctx.lineTo(cx, yTop - 38);
+
+        ctx.stroke();
+
+    }
+
+
+    function drawChinaBuilding(x, yTop, w, h, region) {
+
+        const tiers = 3;
+
+        const tierH =
+            Math.min(24, h / (tiers + 1));
+
+        ctx.fillStyle = "#8c5a2b";
+
+        ctx.fillRect(
+            x + w * 0.42,
+            yTop + tierH * 0.6,
+            w * 0.16,
+            h - tierH * 0.6
+        );
+
+        for (let t = 0; t < tiers; t++) {
+
+            const shrink = t * 6;
+
+            const tw = w - shrink * 2;
+
+            const tx = x + shrink;
+
+            const ty = yTop + t * tierH * 0.85;
+
+            ctx.fillStyle = region.base;
+
+            ctx.beginPath();
+
+            ctx.moveTo(tx - 8, ty + tierH);
+
+            ctx.lineTo(tx + tw * 0.5, ty);
+
+            ctx.lineTo(tx + tw + 8, ty + tierH);
+
+            ctx.closePath();
+
+            ctx.fill();
+
+            ctx.strokeStyle = region.accent;
+
+            ctx.stroke();
+
+        }
+
+    }
+
+
+    /*
+        ✈️ AVIÓN DIBUJADO (usado si no hay imagen propia)
+    */
+
+    function drawPlaneIcon(x, y, angle) {
+
+        ctx.save();
+
+        ctx.translate(x, y);
+
+        ctx.rotate(angle);
+
+        ctx.fillStyle = "#f5f5f5";
+
+        ctx.strokeStyle = "#c0392b";
+
+        ctx.lineWidth = 1.4;
+
+        ctx.beginPath();
+
+        ctx.ellipse(0, 0, 20, 7, 0, 0, Math.PI * 2);
+
+        ctx.fill();
+
+        ctx.stroke();
+
+        ctx.beginPath();
+
+        ctx.moveTo(20, 0);
+
+        ctx.lineTo(13, -4);
+
+        ctx.lineTo(13, 4);
+
+        ctx.closePath();
+
+        ctx.fillStyle = "#c0392b";
+
+        ctx.fill();
+
+        ctx.fillStyle = "#e3e3e3";
+
+        ctx.beginPath();
+
+        ctx.moveTo(-2, -5);
+
+        ctx.lineTo(-15, -19);
+
+        ctx.lineTo(-6, -5);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+        ctx.beginPath();
+
+        ctx.moveTo(-2, 5);
+
+        ctx.lineTo(-15, 19);
+
+        ctx.lineTo(-6, 5);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+        ctx.fillStyle = "#c0392b";
+
+        ctx.beginPath();
+
+        ctx.moveTo(-16, -2);
+
+        ctx.lineTo(-25, -10);
+
+        ctx.lineTo(-16, 2);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(90,140,190,.7)";
+
+        for (let wx = -8; wx <= 8; wx += 6) {
+
+            ctx.beginPath();
+
+            ctx.arc(wx, -1, 1.4, 0, Math.PI * 2);
+
+            ctx.fill();
+
+        }
+
+        ctx.restore();
+
+    }
+
+
+    /*
+        🏮 MARCA DE LLEGADA DIBUJADA (si no hay imagen propia)
+    */
+
+    function drawGoalIcon(x, y) {
+
+        ctx.save();
+
+        ctx.translate(x, y);
+
+        ctx.strokeStyle = "#8c5a2b";
+
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+
+        ctx.moveTo(0, -24);
+
+        ctx.lineTo(0, -34);
+
+        ctx.stroke();
+
+        ctx.fillStyle = "#c0392b";
+
+        ctx.beginPath();
+
+        ctx.ellipse(0, 0, 14, 20, 0, 0, Math.PI * 2);
+
+        ctx.fill();
+
+        ctx.strokeStyle = "#f4d35e";
+
+        ctx.lineWidth = 2;
+
+        ctx.stroke();
+
+        ctx.fillStyle = "#f4d35e";
+
+        ctx.fillRect(-6, -24, 12, 4);
+
+        ctx.fillRect(-6, 20, 12, 4);
+
+        ctx.restore();
+
+    }
+
+
+    function flap() {
+
+        if (gameOver) return;
+
+        started = true;
+
+        velocity = flapPower;
+
+    }
+
+
+    area.addEventListener("pointerdown", function(e) {
+
+        e.preventDefault();
+
+        flap();
+
+    });
+
+
+    function crash() {
+
+        if (gameOver) return;
+
+        gameOver = true;
+
+        if (rafId) cancelAnimationFrame(rafId);
+
+        showResult(false);
+
+    }
+
+
+    function succeed() {
+
+        if (gameOver) return;
+
+        gameOver = true;
+
+        if (rafId) cancelAnimationFrame(rafId);
+
+        showResult(true);
+
+    }
+
+
+    function showResult(isWin) {
+
+        const finalScore =
+            isWin ? totalObstacles : score;
+
+        let finalMessage =
+            item.results[0].message;
+
+        item.results.forEach(function(tier) {
+
+            if (finalScore >= tier.min) {
+
+                finalMessage = tier.message;
+
+            }
+
+        });
+
+        resultBox.innerHTML = "";
+
+        const line =
+            document.createElement("div");
+
+        line.className =
+            "message";
+
+        line.textContent =
+            (
+                isWin
+                ? "🎉 到达中国啦！(" + finalScore + "/" + totalObstacles + ")"
+                : "💥 掉下来了 (" + finalScore + "/" + totalObstacles + ")"
+            ) +
+            "\n\n" +
+            finalMessage;
+
+        resultBox.appendChild(line);
+
+        const retryBtn =
+            document.createElement("button");
+
+        retryBtn.className =
+            "button";
+
+        retryBtn.style.border =
+            "none";
+
+        retryBtn.style.cursor =
+            "pointer";
+
+        retryBtn.style.fontSize =
+            "16px";
+
+        retryBtn.textContent =
+            "再来一次 🔁";
+
+        retryBtn.addEventListener(
+            "click",
+            function() {
+
+                startFlappyGame(item);
+
+            }
+        );
+
+        resultBox.appendChild(retryBtn);
+
+        if (isWin) {
+
+            sendTelegramNotification(
+                "✈️ ¡Llegó a China en el minijuego del día 8!"
+            );
+
+        }
+
+    }
+
+
+    function loop() {
+
+        if (gameOver) return;
+
+        const progressFrac =
+            score / totalObstacles;
+
+        const sky =
+            currentSkyColors(progressFrac);
+
+        const gradient =
+            ctx.createLinearGradient(0, 0, 0, H);
+
+        gradient.addColorStop(0, sky.top);
+
+        gradient.addColorStop(1, sky.bottom);
+
+        ctx.fillStyle = gradient;
+
+        ctx.fillRect(0, 0, W, H);
+
+        if (started) {
+
+            velocity += gravity;
+
+            planeY += velocity;
+
+            pillars.forEach(function(p) {
+                p.x -= scrollSpeed;
+            });
+
+            finish.x -= scrollSpeed;
+
+            start.x -= scrollSpeed;
+
+            hillOffset -= scrollSpeed * 0.4;
+
+            if (Math.random() < 0.55) {
+
+                planeParticles.push({
+                    x: planeX - 20,
+                    y: planeY + (Math.random() * 6 - 3),
+                    life: 1
+                });
+
+            }
+
+        } else {
+
+            planeY =
+                H / 2 + Math.sin(Date.now() / 300) * 8;
+
+        }
+
+
+        drawHills();
+
+
+        pillars.forEach(function(p) {
+
+            drawCloudPillar(p.x, 0, pillarWidth, p.gapY, p.region);
+
+            drawBuilding(
+                p.x,
+                p.gapY + gapHeight,
+                pillarWidth,
+                H - (p.gapY + gapHeight),
+                p.region
+            );
+
+        });
+
+
+        updateAndDrawPlaneTrail();
+
+
+        /*
+            🇪🇸 Bandera de salida
+            (parte del mundo: se queda atrás al volar,
+            igual que la bandera de China se acerca)
+        */
+
+        if (start.x > -60) {
+
+            if (startSprite.loaded) {
+
+                ctx.drawImage(
+                    startSprite.img,
+                    start.x - 17, H - 46,
+                    34, 24
+                );
+
+            } else {
+
+                ctx.font = "26px sans-serif";
+
+                ctx.textAlign = "center";
+
+                ctx.fillText(
+                    item.startFallback || "🇪🇸",
+                    start.x,
+                    H - 22
+                );
+
+            }
+
+        }
+
+
+        if (finish.x < W + 60) {
+
+            if (goalSprite.loaded) {
+
+                ctx.drawImage(
+                    goalSprite.img,
+                    finish.x - 24,
+                    H / 2 - 40,
+                    48,
+                    80
+                );
+
+            } else {
+
+                ctx.font = "44px sans-serif";
+
+                ctx.textAlign = "center";
+
+                ctx.fillText(
+                    item.goalFallback || "🇨🇳",
+                    finish.x,
+                    H / 2 + 16
+                );
+
+            }
+
+        }
+
+
+        ctx.save();
+
+        ctx.globalAlpha = .18;
+
+        ctx.fillStyle = "#1a1a1a";
+
+        ctx.beginPath();
+
+        ctx.ellipse(planeX, H - 8, 20, 5, 0, 0, Math.PI * 2);
+
+        ctx.fill();
+
+        ctx.restore();
+
+
+        if (planeSprite.loaded) {
+
+            ctx.save();
+
+            ctx.translate(planeX, planeY);
+
+            ctx.rotate(
+                Math.max(-0.4, Math.min(0.9, velocity / 12))
+            );
+
+            ctx.drawImage(
+                planeSprite.img,
+                -22, -16, 44, 32
+            );
+
+            ctx.restore();
+
+        } else {
+
+            drawPlaneIcon(
+                planeX,
+                planeY,
+                Math.max(-0.4, Math.min(0.9, velocity / 12))
+            );
+
+        }
+
+
+        if (started && !gameOver) {
+
+            if (planeY - 16 <= 0 || planeY + 16 >= H) {
+
+                crash();
+
+            }
+
+            pillars.forEach(function(p) {
+
+                if (!p.passed && p.x + pillarWidth < planeX) {
+
+                    p.passed = true;
+
+                    score++;
+
+                    scoreLabel.textContent =
+                        "✈️ " + score;
+
+                    progressLabel.textContent =
+                        "🇪🇸 " +
+                        Math.round((score / totalObstacles) * 100) +
+                        "% 🇨🇳";
+
+                }
+
+                const withinX =
+                    planeX + 18 > p.x &&
+                    planeX - 18 < p.x + pillarWidth;
+
+                if (withinX) {
+
+                    const hitsGap =
+                        planeY - 16 < p.gapY ||
+                        planeY + 16 > p.gapY + gapHeight;
+
+                    if (hitsGap) crash();
+
+                }
+
+            });
+
+            if (!gameOver && finish.x + 24 < planeX) {
+
+                progressLabel.textContent =
+                    "🇪🇸 100% 🇨🇳";
+
+                succeed();
+
+            }
+
+        }
+
+
+        rafId =
+            requestAnimationFrame(loop);
+
+    }
+
+
+    rafId =
+        requestAnimationFrame(loop);
 
 }
 
@@ -2888,6 +4248,31 @@ function startFusionGame(item) {
 
         recordTrailPoint(e.clientX, e.clientY);
 
+        /*
+            En móvil, el "pointerenter" de cada fruta NO
+            se dispara durante un arrastre (el navegador
+            no vuelve a comprobar qué hay debajo del dedo).
+            Por eso comprobamos aquí, a mano, qué elementos
+            hay justo debajo del dedo/ratón en cada movimiento.
+        */
+
+        const hits =
+            document.elementsFromPoint(e.clientX, e.clientY);
+
+        hits.forEach(function(hitEl) {
+
+            if (
+                hitEl.classList &&
+                hitEl.classList.contains("game-item") &&
+                typeof hitEl._trySlice === "function"
+            ) {
+
+                hitEl._trySlice();
+
+            }
+
+        });
+
     });
 
 
@@ -2988,11 +4373,7 @@ function startFusionGame(item) {
 
         }
 
-        el.addEventListener("pointerenter", function() {
-
-            if (dragging) trySlice();
-
-        });
+        el._trySlice = trySlice;
 
         el.addEventListener("click", trySlice);
 
@@ -3016,6 +4397,10 @@ function startFusionGame(item) {
     });
 
     window.addEventListener("pointerup", function() {
+        dragging = false;
+    });
+
+    window.addEventListener("pointercancel", function() {
         dragging = false;
     });
 
