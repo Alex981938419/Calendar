@@ -828,6 +828,91 @@ h1 {
 }
 
 
+
+/* =====================================================
+   MONEDA AL AIRE (día 9)
+===================================================== */
+ 
+.coin-wrap {
+ 
+    display: flex;
+ 
+    justify-content: center;
+ 
+    margin: 22px 0 10px;
+ 
+    perspective: 700px;
+}
+ 
+.coin {
+ 
+    width: 130px;
+ 
+    height: 130px;
+ 
+    position: relative;
+ 
+    transform-style: preserve-3d;
+ 
+    transition:
+        transform
+        2.4s
+        cubic-bezier(.15, .65, .25, 1.15);
+}
+ 
+.coin-face {
+ 
+    position: absolute;
+ 
+    inset: 0;
+ 
+    border-radius: 50%;
+ 
+    display: flex;
+ 
+    flex-direction: column;
+ 
+    align-items: center;
+ 
+    justify-content: center;
+ 
+    font-size: 15px;
+ 
+    font-weight: 700;
+ 
+    line-height: 1.4;
+ 
+    backface-visibility: hidden;
+ 
+    box-shadow:
+        inset 0 0 0 4px rgba(255,255,255,.55),
+        0 8px 18px rgba(120,60,80,.3);
+}
+ 
+.coin-face span {
+    font-size: 30px;
+}
+ 
+.coin-front {
+ 
+    background:
+        linear-gradient(145deg, #ffd1dc, #ff8fa3);
+ 
+    color: #7a1f34;
+}
+ 
+.coin-back {
+ 
+    background:
+        linear-gradient(145deg, #ffd27a, #ff7a45);
+ 
+    color: #7a3410;
+ 
+    transform: rotateY(180deg);
+}
+
+
+
 /* =====================================================
    MINIJUEGO (día 6)
 ===================================================== */
@@ -1701,17 +1786,35 @@ const surprises = [
 
     {
         day: 9,
-
-        title: "Día 9 🎵",
-
-        type: "link",
-
-        content:
-        "坏女孩！\n\n"+
-        "你比韩剧的剧情还好猜\n"+
-        "我可是永远领先你两步 😏"
-    
+ 
+        title: "第九天 🪙",
+ 
+        type: "coin",
+ 
+        intro:
+        "今天我们要玩“真心话大冒险”。你知道这个游戏吗？\n" +
+        "你可以抛一枚硬币，然后让我选择回答你的一个问题，\n" +
+        "而且必须说出全部真相；或者你也可以让我完成一个挑战。",
+ 
+        truthQuestions: [
+ 
+            "现在你可以问 Alejandro 任何你最想知道的问题。",
+            "现在你可以问 Alejandro 任何你最想知道的问题。",
+            "现在你可以问 Alejandro 任何你最想知道的问题。",
+            "现在你可以问 Alejandro 任何你最想知道的问题。"
+ 
+        ],
+ 
+        dares: [
+ 
+            "现在你可以给 Alejandro 提出一个你希望他完成的挑战。",
+            "现在你可以给 Alejandro 提出一个你希望他完成的挑战。",
+            "现在你可以给 Alejandro 提出一个你希望他完成的挑战。",
+            "现在你可以给 Alejandro 提出一个你希望他完成的挑战。"
+ 
+        ]
     },
+
 
 
     {
@@ -2753,6 +2856,60 @@ function openSurprise(
         applyFlappyBackground(item);
 
     }
+
+    
+    /*
+        🪙 MONEDA AL AIRE: VERDAD O RETO (para él)
+    */
+ 
+    else if (
+        item.type ===
+        "coin"
+    ) {
+ 
+        heart.textContent =
+            "🪙";
+ 
+        content.innerHTML = `
+ 
+            <div class="message">
+                ${item.intro}
+            </div>
+ 
+            <div class="coin-wrap">
+                <div class="coin" id="coinEl">
+                    <div class="coin-face coin-front">
+                        <span>💗</span>
+                        真心话
+                    </div>
+                    <div class="coin-face coin-back">
+                        <span>🔥</span>
+                        大冒险
+                    </div>
+                </div>
+            </div>
+ 
+            <button
+                class="button"
+                id="flipCoinBtn"
+                style="border:none;cursor:pointer;font-size:16px;"
+            >
+                扔硬币 🪙
+            </button>
+ 
+            <div class="game-result" id="coinResult"></div>
+ 
+        `;
+ 
+        document
+            .getElementById("flipCoinBtn")
+            .addEventListener("click", function() {
+ 
+                startCoinFlip(item, this);
+ 
+            });
+    }
+
 
 
     /*
@@ -4478,6 +4635,74 @@ function startFusionGame(item) {
 
 }
 
+
+
+/* =====================================================
+   🪙 LÓGICA DE LA MONEDA AL AIRE (día 9)
+===================================================== */
+ 
+ 
+function startCoinFlip(item, button) {
+ 
+    button.disabled = true;
+ 
+    button.style.opacity = ".5";
+ 
+    button.style.cursor = "default";
+ 
+    const coin =
+        document.getElementById("coinEl");
+ 
+    const resultBox =
+        document.getElementById("coinResult");
+ 
+    const isTruth =
+        Math.random() < 0.5;
+ 
+    const spins = 5;
+ 
+    const finalDeg =
+        spins * 360 + (isTruth ? 0 : 180);
+ 
+    coin.style.transform =
+        "rotateY(" + finalDeg + "deg)";
+ 
+    coin.addEventListener(
+        "transitionend",
+        function handler() {
+ 
+            coin.removeEventListener(
+                "transitionend",
+                handler
+            );
+ 
+            const pool =
+                isTruth ? item.truthQuestions : item.dares;
+ 
+            const picked =
+                pool[Math.floor(Math.random() * pool.length)];
+ 
+            const line =
+                document.createElement("div");
+ 
+            line.className =
+                "message";
+ 
+            line.textContent =
+                (isTruth ? "💗 真心话！\n\n" : "🔥 大冒险！\n\n") +
+                picked;
+ 
+            resultBox.appendChild(line);
+ 
+            sendTelegramNotification(
+                "🪙 Tiró la moneda del día 9: " +
+                (isTruth ? "真心话" : "大冒险")
+            );
+ 
+        }
+    );
+ 
+}
 
 
 /* =====================================================
