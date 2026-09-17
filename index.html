@@ -1426,6 +1426,241 @@ h1 {
 
 
 /* =====================================================
+   CASETE (día 18: mixtape de la historia)
+===================================================== */
+
+.tape-wrap {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin: 10px 0 20px;
+}
+
+.tape-body {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 380px;
+
+    aspect-ratio: 5 / 3;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            155deg,
+            #6b4a3a,
+            #3f2c22
+        );
+
+    box-shadow:
+        0 12px 26px rgba(60, 30, 20, .35),
+        inset 0 0 0 2px rgba(255, 235, 210, .12);
+
+    padding: 16px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.tape-label {
+
+    background: #f6ecd8;
+
+    border-radius: 8px;
+
+    padding: 8px 12px;
+
+    text-align: center;
+
+    color: #7a4b23;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+
+    box-shadow: inset 0 0 0 1px rgba(150, 108, 58, .35);
+}
+
+.tape-reels {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 26px;
+}
+
+.reel {
+
+    width: 62px;
+
+    height: 62px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #e9dcc2 0%,
+            #e9dcc2 18%,
+            #4a3324 19%,
+            #4a3324 100%
+        );
+
+    position: relative;
+
+    animation: reelSpin 3.2s linear infinite;
+}
+
+.reel::before,
+.reel::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 34px;
+
+    height: 4px;
+
+    background: #2c1d14;
+
+    transform: translate(-50%, -50%);
+}
+
+.reel::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+@keyframes reelSpin {
+    to { transform: rotate(360deg); }
+}
+
+.tape-eq {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    height: 26px;
+}
+
+.tape-eq span {
+
+    width: 5px;
+
+    border-radius: 3px;
+
+    background: #f0a5bb;
+
+    animation: eqBounce 1s ease-in-out infinite;
+}
+
+.tape-eq span:nth-child(1) { animation-delay: 0s; }
+.tape-eq span:nth-child(2) { animation-delay: .15s; }
+.tape-eq span:nth-child(3) { animation-delay: .3s; }
+.tape-eq span:nth-child(4) { animation-delay: .1s; }
+.tape-eq span:nth-child(5) { animation-delay: .25s; }
+
+@keyframes eqBounce {
+    0%, 100% { height: 6px; }
+    50% { height: 24px; }
+}
+
+.track-list {
+
+    text-align: left;
+
+    margin: 6px 0 18px;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+.track-list li {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 4px;
+
+    border-bottom: 1px dashed rgba(180, 100, 120, .25);
+
+    font-size: 14px;
+
+    color: #6b4552;
+}
+
+.track-list li:last-child {
+    border-bottom: none;
+}
+
+.track-no {
+
+    font-weight: 800;
+
+    color: #c76a82;
+
+    width: 20px;
+
+    flex-shrink: 0;
+}
+
+.track-info strong {
+
+    display: block;
+
+    color: #7a3f52;
+
+    font-size: 15px;
+}
+
+.track-now {
+
+    margin-left: auto;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #c0392b;
+
+    white-space: nowrap;
+
+    animation: nowBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes nowBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .35; }
+}
+
+
+/* =====================================================
    RESPONSIVE
 ===================================================== */
 
@@ -2208,7 +2443,7 @@ const surprises = [
 
         cardStyle: "vintage",
 
-        content: "torrija.png",
+        content: "torrija.jpg",
 
         message:
         "今天想和你分享一个简单又好吃的甜点食谱 🍮\n\n" +
@@ -2236,22 +2471,27 @@ const surprises = [
     {
         day: 18,
 
-        title: "第十八天 🎵",
+        title: "第十八天 📖",
 
         type: "text",
 
         content:
-        "给我们的歌单 🎵\n\n" +
-        "如果我们的故事有一张专辑，\n" +
-        "第一首会是很轻快的，\n" +
-        "像我们刚认识那会儿，\n" +
-        "一条消息要看好几遍才舍得回。\n\n" +
-        "中间会有几首很安静的，\n" +
-        "是那些视频通话到很晚，\n" +
-        "谁都不想先说“先睡吧”的夜晚。\n\n" +
-        "最后一首，\n" +
-        "会在9月24号那天响起——\n" +
-        "副歌部分，我想牵着你的手一起听。"
+        "我们相识的那天 📖\n\n" +
+        "最开始，只是在Tinder上匹配的两个人。\n" +
+        "我那时的心愿很简单——交几个朋友，\n" +
+        "顺便找人带我认识一下这座城市。\n\n" +
+        "而你，好像格外有兴致，\n" +
+        "主动说要带我到处逛逛。\n\n" +
+        "结果呢，那天晚上，\n" +
+        "我的笨拙全都暴露了出来，\n" +
+        "笨手笨脚地，几乎把整个晚上都搞砸了。\n\n" +
+        "照理说，换成别人，可能转头就走了。\n" +
+        "但你没有——你陪我熬过了那整个尴尬的夜晚。\n\n" +
+        "第二天，我心想，这下肯定没戏了，\n" +
+        "你大概再也不会理我了。\n\n" +
+        "结果，是你先来找我说话的。\n\n" +
+        "你明明看到了我最笨、最不体面的一面，\n" +
+        "却还是，选择留了下来。"
     },
 
 
@@ -2984,6 +3224,73 @@ function openSurprise(
 
             }
         );
+
+    }
+
+
+    /*
+        🎵 MIXTAPE: casete animado con la lista de canciones
+        de la historia (día 18)
+    */
+
+    else if (
+        item.type ===
+        "mixtape"
+    ) {
+
+        heart.textContent =
+            "🎵";
+
+        const tracksHtml =
+            item.tracks.map(function(t, i) {
+
+                return `
+                    <li>
+                        <span class="track-no">${String(i+1).padStart(2,"0")}</span>
+                        <span class="track-info">
+                            <strong>${t.title}</strong>
+                            ${t.desc}
+                        </span>
+                        ${
+                            t.now
+                            ?
+                            `<span class="track-now">▶ NOW PLAYING</span>`
+                            :
+                            ""
+                        }
+                    </li>
+                `;
+
+            }).join("");
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.intro}
+            </div>
+
+            <div class="tape-wrap">
+                <div class="tape-body">
+                    <div class="tape-label">💿 OUR MIXTAPE</div>
+                    <div class="tape-reels">
+                        <div class="reel"></div>
+                        <div class="tape-eq">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="reel"></div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="track-list">
+                ${tracksHtml}
+            </ul>
+
+            <div class="message">
+                ${item.outro}
+            </div>
+
+        `;
 
     }
 
@@ -5461,245 +5768,3 @@ function spawnBeardFx(stage, emoji, kind) {
 
     fx.style.top = y + "px";
 
-    stage.appendChild(fx);
-
-    fx.addEventListener("animationend", function() {
-
-        fx.remove();
-
-    });
-
-}
-
-
-function startBeardGame(item) {
-
-    const stage =
-        document.getElementById("beardStage");
-
-    const image =
-        document.getElementById("beardImage");
-
-    const messageBox =
-        document.getElementById("beardMessage");
-
-    const hitBtn =
-        document.getElementById("hitBtn");
-
-    const shaveBtn =
-        document.getElementById("shaveBtn");
-
-    const buttonsRow =
-        document.getElementById("beardButtons");
-
-    const patRow =
-        document.getElementById("patRow");
-
-    const patBtn =
-        document.getElementById("patBtn");
-
-    let shaved = false;
-
-
-    loadImageWithFallbacks(
-        image,
-        item.beardedImg,
-        function() {
-
-            image.src = makeBeardFallback(true);
-
-        }
-    );
-
-
-    hitBtn.addEventListener("click", function() {
-
-        if (shaved) return;
-
-        playPunchSound();
-
-        stage.classList.add("shaking");
-
-        setTimeout(function() {
-            stage.classList.remove("shaking");
-        }, 350);
-
-        const hitEmojis = ["👊", "💥", "😵"];
-
-        let count = 0;
-
-        const totalHits = 3;
-
-        const hitInterval = setInterval(function() {
-
-            spawnBeardFx(
-                stage,
-                hitEmojis[
-                    Math.floor(Math.random() * hitEmojis.length)
-                ],
-                "hit"
-            );
-
-            count++;
-
-            if (count >= totalHits) {
-
-                clearInterval(hitInterval);
-
-            }
-
-        }, 160);
-
-    });
-
-
-    shaveBtn.addEventListener("click", function() {
-
-        if (shaved) return;
-
-        shaved = true;
-
-        hitBtn.disabled = true;
-
-        shaveBtn.disabled = true;
-
-        playShaveSound();
-
-        const shaveEmojis = ["🪒", "🧴", "✨"];
-
-        let count = 0;
-
-        const totalPasses = 4;
-
-        const shaveInterval = setInterval(function() {
-
-            spawnBeardFx(
-                stage,
-                shaveEmojis[
-                    Math.floor(Math.random() * shaveEmojis.length)
-                ],
-                "shave"
-            );
-
-            count++;
-
-            if (count >= totalPasses) {
-
-                clearInterval(shaveInterval);
-
-            }
-
-        }, 150);
-
-        setTimeout(function() {
-
-            loadImageWithFallbacks(
-                image,
-                item.shavedImg,
-                function() {
-
-                    image.src = makeBeardFallback(false);
-
-                }
-            );
-
-            messageBox.textContent =
-                item.finalMessage;
-
-            buttonsRow.style.display = "none";
-
-            patRow.style.display = "flex";
-
-            sendTelegramNotification(
-                "🪒 ¡Lo afeitó en el minijuego del día 14!"
-            );
-
-        }, 750);
-
-    });
-
-
-    patBtn.addEventListener("click", function() {
-
-        playPatSound();
-
-        const patEmojis = ["🥰", "❤️", "✨"];
-
-        let count = 0;
-
-        const totalPats = 4;
-
-        const patInterval = setInterval(function() {
-
-            spawnBeardFx(
-                stage,
-                patEmojis[
-                    Math.floor(Math.random() * patEmojis.length)
-                ],
-                "pat"
-            );
-
-            count++;
-
-            if (count >= totalPats) {
-
-                clearInterval(patInterval);
-
-            }
-
-        }, 180);
-
-    });
-
-}
-
-
-
-/* =====================================================
-   ❌ CERRAR
-===================================================== */
-
-
-function closeModal() {
-
-    document
-        .getElementById(
-            "modal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-
-/* =====================================================
-   CERRAR TOCANDO FUERA
-===================================================== */
-
-
-document
-    .getElementById(
-        "modal"
-    )
-    .addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target ===
-                this
-            ) {
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-</script>
-
-</body>
-</html>
