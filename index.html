@@ -1661,6 +1661,462 @@ h1 {
 
 
 /* =====================================================
+   MALETA (día 22): adivina qué llevo
+===================================================== */
+
+.suitcase-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin: 18px 0;
+
+}
+
+.suitcase-item {
+
+    position: relative;
+
+    background: linear-gradient(145deg, #ffffff, #f9e7ec);
+
+    border: 2px solid rgba(198,120,140,.25);
+
+    border-radius: 16px;
+
+    padding: 14px 6px 10px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: transform .15s, border-color .15s, background .15s;
+
+    user-select: none;
+
+}
+
+.suitcase-item:active {
+    transform: scale(.95);
+}
+
+.suitcase-item .s-icon {
+
+    display: block;
+
+    font-size: 30px;
+
+    margin-bottom: 6px;
+
+}
+
+.suitcase-item .s-label {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: #7a4b5a;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+
+}
+
+.suitcase-item.selected {
+
+    border-color: #c76a82;
+
+    background: linear-gradient(145deg, #f8ccd8, #efb4c4);
+
+}
+
+.suitcase-item.correct {
+
+    border-color: #4f9179;
+
+    background: linear-gradient(145deg, #d9f2e6, #bfe8d4);
+
+}
+
+.suitcase-item.wrong {
+
+    border-color: #c0392b;
+
+    background: linear-gradient(145deg, #ffd9d0, #ffb9ac);
+
+}
+
+.suitcase-item.disabled {
+    pointer-events: none;
+}
+
+.suitcase-note {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: #8a5262;
+
+    margin-top: 4px;
+
+    line-height: 1.3;
+
+}
+
+
+/* =====================================================
+   AEROPUERTO (día 23): 4 minijuegos
+===================================================== */
+
+.airport-progress {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+
+}
+
+.airport-progress span {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: rgba(198,120,140,.25);
+
+}
+
+.airport-progress span.active {
+    background: #c76a82;
+}
+
+.airport-progress span.done {
+    background: #4f9179;
+}
+
+.airport-step {
+    animation: cardOpen .3s ease;
+}
+
+.passport-card {
+
+    background: linear-gradient(145deg, #f3ede0, #e5dcc4);
+
+    border: 2px solid #8c5a2b;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    text-align: left;
+
+    margin: 12px 0;
+
+    font-size: 14px;
+
+    color: #4a3324;
+
+    box-shadow: 0 8px 20px rgba(90,60,20,.25);
+
+}
+
+.passport-card .p-title {
+
+    text-align: center;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+    color: #7a4b23;
+
+}
+
+.passport-card .p-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    border-bottom: 1px dashed rgba(120,90,50,.3);
+
+    padding: 5px 0;
+
+}
+
+.passport-card .p-row span:first-child {
+
+    font-weight: 700;
+
+    color: #8c5a2b;
+
+}
+
+.airport-btn-row {
+
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-top: 14px;
+
+    flex-wrap: wrap;
+
+}
+
+.airport-btn-row .button {
+
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    margin-top: 0;
+
+}
+
+.airport-btn-row .button.reject {
+
+    background: linear-gradient(135deg, #b0b0b0, #7a7a7a);
+
+}
+
+.map-puzzle {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin: 14px 0;
+
+}
+
+.map-step {
+
+    background: linear-gradient(145deg, #ffffff, #f9e7ec);
+
+    border: 2px solid rgba(198,120,140,.25);
+
+    border-radius: 12px;
+
+    padding: 10px 14px;
+
+    font-size: 14px;
+
+    color: #7a4b5a;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    user-select: none;
+
+    text-align: left;
+
+}
+
+.map-step .m-order {
+
+    width: 24px;
+
+    height: 24px;
+
+    border-radius: 50%;
+
+    background: #c76a82;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+}
+
+.map-step.picked {
+
+    border-color: #4f9179;
+
+    background: linear-gradient(145deg, #d9f2e6, #bfe8d4);
+
+}
+
+.map-step.picked .m-order {
+    display: flex;
+}
+
+.scanner-box {
+
+    position: relative;
+
+    height: 130px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(180deg, #223 0%, #001 100%);
+
+    overflow: hidden;
+
+    margin: 14px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    font-size: 26px;
+
+}
+
+.scanner-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    height: 3px;
+
+    background: rgba(120,255,180,.85);
+
+    box-shadow: 0 0 12px 4px rgba(120,255,180,.65);
+
+    top: 0;
+
+    animation: scanLine 1.6s linear infinite;
+
+}
+
+@keyframes scanLine {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+.dutyfree-box {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin: 14px 0;
+
+    font-size: 30px;
+
+}
+
+.dutyfree-timer {
+
+    font-size: 40px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    color: #c0392b;
+
+    margin: 6px 0 12px;
+
+}
+
+
+/* =====================================================
+   DECLARACIÓN (día 24)
+===================================================== */
+
+.propose-question {
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    color: #9a4059;
+
+    margin: 16px 0 20px;
+
+}
+
+.propose-btn-row {
+
+    position: relative;
+
+    display: flex;
+
+    gap: 16px;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 70px;
+
+    flex-wrap: wrap;
+
+}
+
+.propose-btn-row .button {
+
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
+
+.propose-btn-row .button.no-btn {
+
+    background: linear-gradient(135deg, #b0b0b0, #7a7a7a);
+
+    position: relative;
+
+    transition: transform .15s ease;
+
+}
+
+
+/* =====================================================
    RESPONSIVE
 ===================================================== */
 
@@ -2498,38 +2954,42 @@ const surprises = [
     {
         day: 19,
 
-        title: "第十九天 💌",
+        title: "第十九天 🕰️",
 
         type: "text",
 
         content:
-        "写给你的一封信 💌\n\n" +
-        "亲爱的：\n\n" +
-        "这大概是我写得最认真的一封信，\n" +
-        "却也是最简单的——\n" +
-        "因为想说的话，说到底只有一句：\n\n" +
-        "谢谢你愿意陪我，\n" +
-        "把“隔着屏幕”的日子，\n" +
-        "一天一天熬成了“快要见面”的日子。\n\n" +
-        "信不长，\n" +
-        "剩下的话，我想当面，\n" +
-        "一句一句讲给你听。\n\n" +
-        "爱你的，Alejandro"
+        "倒数第五天了 🕰️\n\n" +
+        "老实说，最近我总是不自觉地点开日历，看看还剩几天。😅\n\n" +
+        "跟你说三件我特别期待的事：\n\n" +
+        "1️⃣ 想亲眼看看你笑起来的样子，而不是隔着一块屏幕。\n" +
+        "2️⃣ 想牵着你的手，一起在街上乱逛，哪怕迷路也没关系。\n" +
+        "3️⃣ 想好好抱抱你，长长地抱一次，抱到你喊我放开为止。\n\n" +
+        "还有五天，我们就要把“屏幕那头”变成“就在身边”了。❤️"
     },
 
 
     {
         day: 20,
 
-        title: "第二十天 🇪🇸",
+        title: "第二十天 🎬",
 
-        type: "text",
+        type: "video",
 
-        content:
+        /*
+            Pon aquí tu vídeo (mp4 recomendado; también
+            funciona m4a si es solo audio). Sustituye
+            "dia20.mp4" por el nombre de tu archivo y
+            colócalo en la misma carpeta que este .html.
+        */
+        content: "dia20.mp4",
+
+        message:
         "西班牙小知识 🇪🇸\n\n" +
         "🕘 西班牙人吃晚饭超级晚，一般晚上9点以后才开饭。\n" +
         "💤 “Siesta”（午睡）是真的，尤其是夏天，中午街上会安静得像空城。\n" +
         "🍇 跨年夜要跟着12下钟声吃葡萄，每响一声吃一颗，一共12颗，讨个好运。\n\n" +
+        "光说没用，今天录了一小段视频给你看看 🎥\n" +
         "以后你来了，这些我都想亲自演示给你看——\n" +
         "尤其是最后一个，很考验手速 😆"
     },
@@ -2538,56 +2998,128 @@ const surprises = [
     {
         day: 21,
 
-        title: "第二十一天 💌",
+        title: "第二十一天 🫒",
 
-        type: "text",
+        type: "image",
 
-        content:
-        "如果把你比作一天中的时刻 🕰️\n\n" +
-        "你是清晨六点的光——\n" +
-        "不刺眼，却能让人瞬间清醒过来。\n\n" +
-        "你是下午三点的风——\n" +
-        "不经意地路过，却让整个下午都刚刚好。\n\n" +
-        "你也是深夜十一点的安静——\n" +
-        "什么都不用做，只是知道你在，\n" +
-        "我就能安心睡着。\n\n" +
-        "一天24小时，\n" +
-        "好像每个时刻，都被你悄悄占满了。"
+        /*
+            Pon aquí tu foto sobre la dieta mediterránea
+            (sustituye "dia21.jpg" por tu archivo).
+        */
+        content: "dia21.jpg",
+
+        message:
+        "地中海饮食 🫒🍷\n\n" +
+        "给你讲个有意思的小知识——地中海饮食被认为是世界上最健康的饮食方式之一，" +
+        "2010年还被联合国教科文组织列入了人类非物质文化遗产名录呢！🌍\n" +
+        "橄榄油、新鲜蔬菜、坚果，还有适量的红酒，都是它的灵魂，" +
+        "研究说这样吃对心脏特别好 ❤️\n\n" +
+        "所以呢，这次去见你，我会给你带上满满一箱地中海的味道——\n\n" +
+        "🍖 火腿（jamón）\n" +
+        "🍷 红酒（vino）\n" +
+        "🌭 各种西班牙香肠（embutidos variados）\n" +
+        "🥛 我们家乡特色的米浆（horchata）\n" +
+        "🫒 各种橄榄（aceitunas y olivas）\n" +
+        "🫗 特级初榨橄榄油（aceite）\n\n" +
+        "到时候，让你也尝尝，什么叫地中海式的幸福 ❤️"
     },
 
 
     {
         day: 22,
 
-        title: "第二十二天 ✨",
+        title: "第二十二天 🧳",
 
-        type: "text",
+        type: "suitcase",
 
-        content:
-        "关于以后 ✨\n\n" +
-        "我经常会想，\n" +
-        "等我们真正在一起生活以后，会是什么样子。\n\n" +
-        "大概会有很多鸡毛蒜皮的争吵——\n" +
-        "比如空调到底开几度，\n" +
-        "比如牙膏该从中间挤还是从底部挤。\n\n" +
-        "但也会有更多说不出理由的开心，\n" +
-        "比如你把我做的饭吃得很香的样子，\n" +
-        "比如我们窝在沙发上，谁都不想动的那种下午。\n\n" +
-        "平凡最难得，\n" +
-        "而我已经开始期待，\n" +
-        "和你一起平凡下去了。"
+        intro:
+        "帮我检查一下行李箱吧！🧳\n" +
+        "下面这些东西，哪些是我真的会带去见你的？\n" +
+        "点一下选中，选好了按“对答案”～",
+
+        items: [
+
+            { icon: "💻", label: "电脑",         real: true },
+            { icon: "🩲", label: "内裤",         real: true },
+            { icon: "🪒", label: "剃须刀",       real: true },
+            { icon: "🎁", label: "礼物",         real: true },
+            { icon: "❤️", label: "想见你的心情", real: true },
+
+            {
+                icon: "🗺️",
+                label: "越南地图",
+                real: false,
+                note: "不需要啦，路线早就刻在我脑子里了 😎"
+            },
+
+            {
+                icon: "📖",
+                label: "西汉词典",
+                real: false,
+                note: "其实该带的……可惜忘带了 😅"
+            },
+
+            {
+                icon: "☂️",
+                label: "雨伞",
+                real: false,
+                note: "夏天很少下雨，用不上啦"
+            },
+
+            {
+                icon: "📚",
+                label: "中国礼仪手册",
+                real: false,
+                note: "早就自学成才了，不用带书 💪"
+            }
+
+        ]
     },
 
 
     {
         day: 23,
 
-        title: "第二十三天 ❤️",
+        title: "第二十三天 ✈️",
 
-        type: "text",
+        type: "airport",
 
-        content:
-        "倒数第二天了 ⏳\n\n" +
+        intro:
+        "倒数第二天了 ⏳\n" +
+        "一起模拟一遍我出发去见你的全过程吧！\n" +
+        "一共4关，帮我顺利登机、顺利找到你家 🧳",
+
+        passport: {
+
+            name: "ALEJANDRO",
+
+            /*
+                Cambia esto por tu ciudad/lugar de
+                nacimiento real.
+            */
+            birthplace: "ESPAÑA",
+
+            nationality: "ESPAÑOLA",
+
+            passportNo: "ESP0000000"
+
+        },
+
+        /*
+            Los 4 pasos del camino a su casa, en el
+            orden CORRECTO. Se mostrarán mezclados y
+            ella tendrá que tocarlos en este orden.
+        */
+        mapSteps: [
+
+            "下飞机，出机场 🛬",
+            "坐地铁到市区 🚇",
+            "走到你家那条街 🚶‍♂️",
+            "敲响你家的门 🚪❤️"
+
+        ],
+
+        finalMessage:
         "说实话，越接近24号，我心里越不平静，\n" +
         "一边是快见到你的兴奋，\n" +
         "一边是“见到你该说什么、摆什么表情”的紧张，\n" +
@@ -2604,16 +3136,22 @@ const surprises = [
 
         title: "Hoy nos encontramos ❤️",
 
-        type: "final",
+        type: "propose",
 
         content:
         "到了。\n\n" +
         "这24天，我们一起倒数、一起玩游戏、\n" +
         "一起吵着谁更喜欢谁多一点，\n" +
         "现在终于，一切都不再是屏幕那头的事了。\n\n" +
-        "谢谢你陪我走完这段等待，\n" +
-        "接下来的，我们当面继续写。\n\n" +
-        "我来了 ❤️"
+        "谢谢你陪我走完这段等待。\n\n" +
+        "在见到你的这一天，我想正式问你一个问题——",
+
+        question:
+        "你愿意做我的女朋友吗？💍",
+
+        yesMessage:
+        "我来了 ❤️\n\n" +
+        "从今天起，我们不再是屏幕两端的两个人了。"
     }
 
 ];
@@ -3668,7 +4206,145 @@ function openSurprise(
 
 
     /*
-        ❤️ DÍA 24
+        🧳 MINIJUEGO: MALETA (día 22)
+    */
+
+    else if (
+        item.type ===
+        "suitcase"
+    ) {
+
+        heart.textContent =
+            "🧳";
+
+        const itemsHtml =
+            item.items.map(function(it, idx) {
+
+                return `
+                    <div class="suitcase-item" data-idx="${idx}">
+                        <span class="s-icon">${it.icon}</span>
+                        <span class="s-label">${it.label}</span>
+                    </div>
+                `;
+
+            }).join("");
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.intro}
+            </div>
+
+            <div class="suitcase-grid" id="suitcaseGrid">
+                ${itemsHtml}
+            </div>
+
+            <button
+                class="button"
+                id="suitcaseCheckBtn"
+                style="border:none;cursor:pointer;font-size:16px;"
+            >
+                对答案 🧳
+            </button>
+
+            <div class="game-result" id="suitcaseResult"></div>
+
+        `;
+
+        startSuitcaseGame(item);
+
+    }
+
+
+    /*
+        ✈️ MINIJUEGO DE 4 FASES: AEROPUERTO (día 23)
+    */
+
+    else if (
+        item.type ===
+        "airport"
+    ) {
+
+        heart.textContent =
+            "✈️";
+
+        content.innerHTML = `
+
+            <div class="message">
+                ${item.intro}
+            </div>
+
+            <div class="airport-progress" id="airportProgress">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div id="airportStage"></div>
+
+        `;
+
+        startAirportGame(item);
+
+    }
+
+
+    /*
+        💍 DECLARACIÓN (día 24)
+    */
+
+    else if (
+        item.type ===
+        "propose"
+    ) {
+
+        heart.textContent =
+            "💍";
+
+        content.innerHTML = `
+
+            <div class="final-message">
+                ${item.content}
+            </div>
+
+            <div class="propose-question">
+                ${item.question}
+            </div>
+
+            <div class="propose-btn-row" id="proposeBtnRow">
+
+                <button
+                    class="button"
+                    id="proposeYes"
+                >
+                    愿意 💍❤️
+                </button>
+
+                <button
+                    class="button no-btn"
+                    id="proposeNo"
+                >
+                    再想想 🤔
+                </button>
+
+            </div>
+
+            <div class="game-result" id="proposeResult"></div>
+
+        `;
+
+        document
+            .getElementById("modalCard")
+            .classList.add("final-card");
+
+        startProposeGame(item);
+
+    }
+
+
+    /*
+        ❤️ DÍA 24 (tipo antiguo, ya no se usa pero se conserva)
     */
 
     else if (
@@ -5553,6 +6229,626 @@ function startCoinFlip(item, button) {
 
 
 /* =====================================================
+   🧳 LÓGICA DEL MINIJUEGO "MALETA" (día 22)
+===================================================== */
+
+
+function startSuitcaseGame(item) {
+
+    const grid =
+        document.getElementById("suitcaseGrid");
+
+    const checkBtn =
+        document.getElementById("suitcaseCheckBtn");
+
+    const resultBox =
+        document.getElementById("suitcaseResult");
+
+    const selected =
+        new Set();
+
+    grid.querySelectorAll(".suitcase-item").forEach(function(el) {
+
+        el.addEventListener("click", function() {
+
+            const idx = el.dataset.idx;
+
+            if (selected.has(idx)) {
+
+                selected.delete(idx);
+
+                el.classList.remove("selected");
+
+            } else {
+
+                selected.add(idx);
+
+                el.classList.add("selected");
+
+            }
+
+        });
+
+    });
+
+    checkBtn.addEventListener("click", function() {
+
+        checkBtn.remove();
+
+        let correct = 0;
+
+        const totalReal =
+            item.items.filter(function(it) { return it.real; }).length;
+
+        grid.querySelectorAll(".suitcase-item").forEach(function(el) {
+
+            const idx = parseInt(el.dataset.idx, 10);
+
+            const data = item.items[idx];
+
+            const isSelected =
+                selected.has(String(idx));
+
+            el.classList.add("disabled");
+
+            if (data.real && isSelected) {
+
+                el.classList.add("correct");
+
+                correct++;
+
+            } else if (!data.real && isSelected) {
+
+                el.classList.add("wrong");
+
+                const note =
+                    document.createElement("span");
+
+                note.className = "suitcase-note";
+
+                note.textContent = data.note || "";
+
+                el.appendChild(note);
+
+            } else if (!data.real && !isSelected) {
+
+                el.classList.add("correct");
+
+            } else if (data.real && !isSelected) {
+
+                el.classList.add("wrong");
+
+            }
+
+        });
+
+        const line =
+            document.createElement("div");
+
+        line.className = "message";
+
+        line.textContent =
+            "猜对了 " + correct + " / " + totalReal + " 件真实携带的物品！\n\n" +
+            (
+                correct === totalReal
+                ? "全对！看来你很了解我的行李箱 🧳❤️"
+                : "差一点点，等我到了让你亲自检查行李箱 😆"
+            );
+
+        resultBox.appendChild(line);
+
+        sendTelegramNotification(
+            "🧳 Jugó al minijuego del día 22 y acertó " +
+            correct + "/" + totalReal
+        );
+
+    });
+
+}
+
+
+
+/* =====================================================
+   ✈️ LÓGICA DEL MINIJUEGO DE 4 FASES "AEROPUERTO" (día 23)
+===================================================== */
+
+
+function startAirportGame(item) {
+
+    const stage =
+        document.getElementById("airportStage");
+
+    const progressDots =
+        document.querySelectorAll("#airportProgress span");
+
+    let stepIndex = 0;
+
+
+    function setProgress(i) {
+
+        progressDots.forEach(function(dot, idx) {
+
+            dot.classList.remove("active", "done");
+
+            if (idx < i) dot.classList.add("done");
+
+            else if (idx === i) dot.classList.add("active");
+
+        });
+
+    }
+
+
+    function nextStep() {
+
+        stepIndex++;
+
+        setProgress(stepIndex);
+
+        if (stepIndex === 1) renderMapStep();
+
+        else if (stepIndex === 2) renderScannerStep();
+
+        else if (stepIndex === 3) renderDutyfreeStep();
+
+        else renderDoneStep();
+
+    }
+
+
+    /*
+        PASO 1: PASAPORTE
+    */
+
+    function renderPassportStep() {
+
+        setProgress(0);
+
+        const p =
+            item.passport;
+
+        stage.innerHTML = `
+
+            <div class="airport-step">
+
+                <div class="passport-card">
+                    <div class="p-title">PASAPORTE · ESPAÑA</div>
+                    <div class="p-row"><span>姓名 / Nombre</span><span>${p.name}</span></div>
+                    <div class="p-row"><span>出生地 / Lugar de nacimiento</span><span>${p.birthplace}</span></div>
+                    <div class="p-row"><span>国籍 / Nacionalidad</span><span>${p.nationality}</span></div>
+                    <div class="p-row"><span>护照号 / No.</span><span>${p.passportNo}</span></div>
+                </div>
+
+                <div class="message" style="font-size:15px;">
+                    海关官员，此人可以入境吗？🕵️‍♀️
+                </div>
+
+                <div class="airport-btn-row">
+                    <button class="button" id="passApprove">批准入境 ✅</button>
+                    <button class="button reject" id="passReject">再检查一下 🧐</button>
+                </div>
+
+            </div>
+
+        `;
+
+        document
+            .getElementById("passApprove")
+            .addEventListener("click", nextStep);
+
+        document
+            .getElementById("passReject")
+            .addEventListener("click", function() {
+
+                this.textContent =
+                    "好吧好吧，他是好人 😅";
+
+                this.disabled = true;
+
+                document
+                    .getElementById("passApprove")
+                    .disabled = true;
+
+                setTimeout(nextStep, 700);
+
+            });
+
+    }
+
+
+    /*
+        PASO 2: MAPA
+    */
+
+    function renderMapStep() {
+
+        const steps =
+            item.mapSteps || [
+
+                "下飞机，出机场 🛬",
+                "坐地铁到市区 🚇",
+                "走到你家那条街 🚶‍♂️",
+                "敲响你家的门 🚪❤️"
+
+            ];
+
+        const shuffled =
+            steps
+            .map(function(text, idx) {
+                return { text: text, correctIdx: idx };
+            })
+            .sort(function() {
+                return Math.random() - 0.5;
+            });
+
+        stage.innerHTML = `
+
+            <div class="airport-step">
+
+                <div class="message" style="font-size:15px;">
+                    帮我按正确的顺序点一遍，才能找到你家 🗺️
+                </div>
+
+                <div class="map-puzzle" id="mapPuzzle"></div>
+
+            </div>
+
+        `;
+
+        const puzzleEl =
+            document.getElementById("mapPuzzle");
+
+        let picks = [];
+
+        shuffled.forEach(function(s) {
+
+            const stepEl =
+                document.createElement("div");
+
+            stepEl.className = "map-step";
+
+            stepEl.dataset.correctIdx = s.correctIdx;
+
+            stepEl.innerHTML =
+                '<span class="m-order"></span><span>' +
+                s.text +
+                '</span>';
+
+            stepEl.addEventListener("click", function() {
+
+                if (stepEl.classList.contains("picked")) return;
+
+                picks.push(parseInt(stepEl.dataset.correctIdx, 10));
+
+                stepEl.classList.add("picked");
+
+                stepEl.querySelector(".m-order").textContent =
+                    picks.length;
+
+                if (picks.length === steps.length) {
+
+                    const isCorrect =
+                        picks.every(function(v, i) { return v === i; });
+
+                    setTimeout(function() {
+
+                        if (isCorrect) {
+
+                            nextStep();
+
+                        } else {
+
+                            const msg =
+                                document.createElement("div");
+
+                            msg.className = "message";
+
+                            msg.textContent =
+                                "路线不太对，不过没关系，有你等着我，\n" +
+                                "就算绕点路，我也一定能找到你家 😆";
+
+                            puzzleEl.appendChild(msg);
+
+                            setTimeout(nextStep, 1400);
+
+                        }
+
+                    }, 400);
+
+                }
+
+            });
+
+            puzzleEl.appendChild(stepEl);
+
+        });
+
+    }
+
+
+    /*
+        PASO 3: ESCÁNER
+    */
+
+    function renderScannerStep() {
+
+        stage.innerHTML = `
+
+            <div class="airport-step">
+
+                <div class="message" style="font-size:15px;">
+                    安检时间！扫描一下我的行李箱 🔍
+                </div>
+
+                <div class="scanner-box" id="scannerBox">
+                    💻 🩲 🪒 🎁
+                </div>
+
+                <div class="airport-btn-row">
+                    <button class="button" id="scanBtn">开始扫描 📡</button>
+                </div>
+
+            </div>
+
+        `;
+
+        document
+            .getElementById("scanBtn")
+            .addEventListener("click", function() {
+
+                this.disabled = true;
+
+                this.textContent = "扫描中...";
+
+                setTimeout(function() {
+
+                    const msg =
+                        document.createElement("div");
+
+                    msg.className = "message";
+
+                    msg.textContent =
+                        "✅ 安检通过！\n没有违禁品，只有满满的爱和一堆吃的 🥰";
+
+                    document
+                        .getElementById("scannerBox")
+                        .after(msg);
+
+                    setTimeout(nextStep, 1200);
+
+                }, 1600);
+
+            });
+
+    }
+
+
+    /*
+        PASO 4: DUTY FREE
+    */
+
+    function renderDutyfreeStep() {
+
+        let timeLeft = 8;
+
+        stage.innerHTML = `
+
+            <div class="airport-step">
+
+                <div class="message" style="font-size:15px;">
+                    免税店太好逛了，小心别逛忘了时间，飞机可不等人！✈️💨
+                </div>
+
+                <div class="dutyfree-box">
+                    <span>🍫</span><span>🥂</span><span>👜</span><span>🕶️</span><span>💄</span>
+                </div>
+
+                <div class="dutyfree-timer" id="dutyTimer">${timeLeft}</div>
+
+                <div class="airport-btn-row">
+                    <button class="button" id="boardBtn">快去登机！🏃‍♂️✈️</button>
+                </div>
+
+            </div>
+
+        `;
+
+        const timerEl =
+            document.getElementById("dutyTimer");
+
+        const boardBtn =
+            document.getElementById("boardBtn");
+
+        let missed = false;
+
+        const countdown = setInterval(function() {
+
+            timeLeft--;
+
+            timerEl.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+
+                clearInterval(countdown);
+
+                missed = true;
+
+                boardBtn.disabled = true;
+
+                const msg =
+                    document.createElement("div");
+
+                msg.className = "message";
+
+                msg.textContent =
+                    "糟糕，看免税店看得太入迷，差点误机！😱\n" +
+                    "还好最后一刻冲上了飞机……下次不敢了 😆";
+
+                stage.appendChild(msg);
+
+                setTimeout(nextStep, 1600);
+
+            }
+
+        }, 1000);
+
+        boardBtn.addEventListener("click", function() {
+
+            if (missed) return;
+
+            clearInterval(countdown);
+
+            boardBtn.disabled = true;
+
+            const msg =
+                document.createElement("div");
+
+            msg.className = "message";
+
+            msg.textContent =
+                "反应真快！成功登机，没有错过飞机 🎉✈️";
+
+            stage.appendChild(msg);
+
+            setTimeout(nextStep, 1200);
+
+        });
+
+    }
+
+
+    /*
+        PASO FINAL
+    */
+
+    function renderDoneStep() {
+
+        setProgress(4);
+
+        stage.innerHTML = `
+
+            <div class="airport-step">
+
+                <div class="message">
+                    ${item.finalMessage}
+                </div>
+
+            </div>
+
+        `;
+
+        sendTelegramNotification(
+            "✈️ Completó el minijuego de 4 fases del día 23"
+        );
+
+    }
+
+
+    renderPassportStep();
+
+}
+
+
+
+/* =====================================================
+   💍 LÓGICA DE LA DECLARACIÓN (día 24)
+===================================================== */
+
+
+function startProposeGame(item) {
+
+    const noBtn =
+        document.getElementById("proposeNo");
+
+    const yesBtn =
+        document.getElementById("proposeYes");
+
+    const row =
+        document.getElementById("proposeBtnRow");
+
+    const resultBox =
+        document.getElementById("proposeResult");
+
+    let dodges = 0;
+
+
+    function dodgeNo() {
+
+        dodges++;
+
+        const rowRect =
+            row.getBoundingClientRect();
+
+        const maxX =
+            Math.max(20, rowRect.width - 90);
+
+        const randomX =
+            Math.random() * maxX - maxX / 2;
+
+        const randomY =
+            (Math.random() - 0.5) * 30;
+
+        noBtn.style.transform =
+            "translate(" + randomX + "px," + randomY + "px)";
+
+        if (dodges >= 3) {
+
+            noBtn.style.opacity = ".35";
+
+            noBtn.textContent =
+                "……好吧，随便你 🙈";
+
+        }
+
+    }
+
+
+    noBtn.addEventListener(
+        "pointerenter",
+        dodgeNo
+    );
+
+    noBtn.addEventListener(
+        "click",
+        function(e) {
+
+            e.preventDefault();
+
+            dodgeNo();
+
+        }
+    );
+
+
+    yesBtn.addEventListener("click", function() {
+
+        yesBtn.disabled = true;
+
+        noBtn.disabled = true;
+
+        row.style.display = "none";
+
+        const line =
+            document.createElement("div");
+
+        line.className = "final-message";
+
+        line.textContent =
+            item.yesMessage;
+
+        resultBox.appendChild(line);
+
+        sendTelegramNotification(
+            "💍 ¡Dijo que SÍ el día 24!"
+        );
+
+    });
+
+}
+
+
+
+/* =====================================================
    🔊 SONIDOS SINTETIZADOS (sin archivos de audio)
    Se generan con Web Audio API: un "golpe" grave y seco,
    un "raspado" de afeitar y un "tin" suave para las caricias.
@@ -5768,3 +7064,245 @@ function spawnBeardFx(stage, emoji, kind) {
 
     fx.style.top = y + "px";
 
+    stage.appendChild(fx);
+
+    fx.addEventListener("animationend", function() {
+
+        fx.remove();
+
+    });
+
+}
+
+
+function startBeardGame(item) {
+
+    const stage =
+        document.getElementById("beardStage");
+
+    const image =
+        document.getElementById("beardImage");
+
+    const messageBox =
+        document.getElementById("beardMessage");
+
+    const hitBtn =
+        document.getElementById("hitBtn");
+
+    const shaveBtn =
+        document.getElementById("shaveBtn");
+
+    const buttonsRow =
+        document.getElementById("beardButtons");
+
+    const patRow =
+        document.getElementById("patRow");
+
+    const patBtn =
+        document.getElementById("patBtn");
+
+    let shaved = false;
+
+
+    loadImageWithFallbacks(
+        image,
+        item.beardedImg,
+        function() {
+
+            image.src = makeBeardFallback(true);
+
+        }
+    );
+
+
+    hitBtn.addEventListener("click", function() {
+
+        if (shaved) return;
+
+        playPunchSound();
+
+        stage.classList.add("shaking");
+
+        setTimeout(function() {
+            stage.classList.remove("shaking");
+        }, 350);
+
+        const hitEmojis = ["👊", "💥", "😵"];
+
+        let count = 0;
+
+        const totalHits = 3;
+
+        const hitInterval = setInterval(function() {
+
+            spawnBeardFx(
+                stage,
+                hitEmojis[
+                    Math.floor(Math.random() * hitEmojis.length)
+                ],
+                "hit"
+            );
+
+            count++;
+
+            if (count >= totalHits) {
+
+                clearInterval(hitInterval);
+
+            }
+
+        }, 160);
+
+    });
+
+
+    shaveBtn.addEventListener("click", function() {
+
+        if (shaved) return;
+
+        shaved = true;
+
+        hitBtn.disabled = true;
+
+        shaveBtn.disabled = true;
+
+        playShaveSound();
+
+        const shaveEmojis = ["🪒", "🧴", "✨"];
+
+        let count = 0;
+
+        const totalPasses = 4;
+
+        const shaveInterval = setInterval(function() {
+
+            spawnBeardFx(
+                stage,
+                shaveEmojis[
+                    Math.floor(Math.random() * shaveEmojis.length)
+                ],
+                "shave"
+            );
+
+            count++;
+
+            if (count >= totalPasses) {
+
+                clearInterval(shaveInterval);
+
+            }
+
+        }, 150);
+
+        setTimeout(function() {
+
+            loadImageWithFallbacks(
+                image,
+                item.shavedImg,
+                function() {
+
+                    image.src = makeBeardFallback(false);
+
+                }
+            );
+
+            messageBox.textContent =
+                item.finalMessage;
+
+            buttonsRow.style.display = "none";
+
+            patRow.style.display = "flex";
+
+            sendTelegramNotification(
+                "🪒 ¡Lo afeitó en el minijuego del día 14!"
+            );
+
+        }, 750);
+
+    });
+
+
+    patBtn.addEventListener("click", function() {
+
+        playPatSound();
+
+        const patEmojis = ["🥰", "❤️", "✨"];
+
+        let count = 0;
+
+        const totalPats = 4;
+
+        const patInterval = setInterval(function() {
+
+            spawnBeardFx(
+                stage,
+                patEmojis[
+                    Math.floor(Math.random() * patEmojis.length)
+                ],
+                "pat"
+            );
+
+            count++;
+
+            if (count >= totalPats) {
+
+                clearInterval(patInterval);
+
+            }
+
+        }, 180);
+
+    });
+
+}
+
+
+
+/* =====================================================
+   ❌ CERRAR
+===================================================== */
+
+
+function closeModal() {
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+
+/* =====================================================
+   CERRAR TOCANDO FUERA
+===================================================== */
+
+
+document
+    .getElementById(
+        "modal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
